@@ -525,14 +525,49 @@ function UltimaPartnershipPage() {
     }
   };
 
-  // Vẽ biểu tượng SVG chính thức của thương hiệu Ultima
+  // Vẽ biểu tượng SVG chính thức của thương hiệu Ultima (2 cột song song màu xanh Lime)
   const UltimaLogoSVG = () => (
-    <svg width="24" height="24" viewBox="0 0 32 32" fill="none" className="flex-shrink-0 text-emerald-600">
-      {/* Cột xiên bên trái (màu xanh neon/emerald) */}
+    <svg width="24" height="24" viewBox="0 0 32 32" fill="none" className="flex-shrink-0 text-[#a6ff00]">
+      {/* Cột xiên bên trái (Màu Xanh Chanh) */}
       <path d="M6 10 L15 14 L15 30 L6 26 Z" fill="currentColor" />
-      {/* Cột xiên bên phải (màu tối hoặc trắng phụ thuộc nền, ở đây dùng màu đen/slate) */}
-      <path d="M17 6 L26 10 L26 26 L17 22 Z" fill="#0f172a" />
+      {/* Cột xiên bên phải (Màu Xanh Chanh) */}
+      <path d="M17 6 L26 10 L26 26 L17 22 Z" fill="currentColor" />
     </svg>
+  );
+
+  // Logo Qi Prime chính thức theo nhận diện mới (Silver #C0C0C0 & Neon Green #39FF14, text #F5F5F5)
+  const QiPrimeLogoSVG = ({ isDarkBg = true }: { isDarkBg?: boolean }) => (
+    <div className="flex items-center gap-2">
+      <svg width="32" height="32" viewBox="0 0 100 100" fill="none" className="flex-shrink-0">
+        {/* Vòng tròn đồng tâm ngoài cùng - Màu Bạc #C0C0C0 */}
+        <circle cx="50" cy="50" r="45" stroke="#C0C0C0" strokeWidth="2.2" opacity="0.3" strokeDasharray="6,4" fill="none" />
+        
+        {/* Đường Arc màu Bạc #C0C0C0 */}
+        <path d="M 22 30 A 40 40 0 0 1 78 30" stroke="#C0C0C0" strokeWidth="4.5" strokeLinecap="round" fill="none" />
+        
+        {/* Đường Arc màu Xanh Neon #39FF14 */}
+        <path d="M 82 58 A 40 40 0 0 1 18 58" stroke="#39FF14" strokeWidth="4.5" strokeLinecap="round" fill="none" />
+        
+        {/* Khối tròn đồng tâm lõi âm dương chữ S */}
+        {/* Nửa bên trái màu Xanh Neon #39FF14 */}
+        <path d="M 50 20 A 30 30 0 0 0 50 80 A 15 15 0 0 1 50 50 A 15 15 0 0 0 50 20" fill="#39FF14" />
+        
+        {/* Nửa bên phải màu Bạc #C0C0C0 */}
+        <path d="M 50 20 A 30 30 0 0 1 50 80 A 15 15 0 0 1 50 50 A 15 15 0 0 0 50 20" fill="#C0C0C0" />
+        
+        {/* Vòng kim loại nhỏ bên trong cùng */}
+        <circle cx="50" cy="50" r="16" stroke="#C0C0C0" strokeWidth="2.2" opacity="0.4" fill="none" />
+      </svg>
+      <span 
+        className="font-black tracking-widest text-lg font-display uppercase"
+        style={{ 
+          color: isDarkBg ? "#F5F5F5" : "#0f172a", 
+          textShadow: isDarkBg ? "0 0 10px rgba(245, 245, 245, 0.7), 0 0 20px rgba(245, 245, 245, 0.3)" : "none" 
+        }}
+      >
+        QI PRIME
+      </span>
+    </div>
   );
 
   return (
@@ -565,26 +600,22 @@ function UltimaPartnershipPage() {
         </div>
       </div>
 
-      {/* Header/Navbar (Nền sáng) */}
-      <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200/80 shadow-sm">
+      {/* Header/Navbar (Nền tối để làm nổi bật logo phát sáng) */}
+      <header className="sticky top-0 z-40 bg-slate-950/95 backdrop-blur-md border-b border-zinc-900 shadow-md">
         <div className="max-w-7xl mx-auto px-4 h-16 sm:h-20 flex items-center justify-between">
           <div className="flex items-center gap-3">
             {/* Logo Qi Prime */}
             <a href="/" className="block">
-              <img 
-                src="/assets/qiprime-official-logo.png" 
-                alt="Qi Prime" 
-                className="h-9 sm:h-12 w-auto object-contain" 
-              />
+              <QiPrimeLogoSVG isDarkBg={true} />
             </a>
-            <span className="h-5 w-px bg-slate-300"></span>
+            <span className="h-5 w-px bg-zinc-800"></span>
             
             {/* Logo Thương Hiệu Ultima */}
             <div className="flex items-center gap-1.5">
               <UltimaLogoSVG />
               <div className="flex flex-col">
-                <span className="text-[11px] font-black tracking-widest text-slate-900 leading-none font-display">ULTIMA</span>
-                <span className="text-[7.5px] tracking-wider text-emerald-600 leading-none font-bold">MARKETS</span>
+                <span className="text-[11px] font-black tracking-widest text-white leading-none font-display">ULTIMA</span>
+                <span className="text-[7.5px] tracking-wider text-[#a6ff00] leading-none font-bold">MARKETS</span>
               </div>
             </div>
           </div>
@@ -592,7 +623,7 @@ function UltimaPartnershipPage() {
           <div>
             <button 
               onClick={() => scrollToRef(section4Ref)}
-              className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl transition-all shadow-md active:scale-95"
+              className="bg-[#39FF14] hover:bg-[#39FF14]/90 text-slate-950 font-black text-xs sm:text-sm px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl transition-all shadow-md active:scale-95"
             >
               Nhận Suất Free
             </button>
@@ -617,14 +648,14 @@ function UltimaPartnershipPage() {
           </Reveal>
 
           <Reveal delay={90}>
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 leading-tight font-display tracking-tight text-balance">
-              90% Thất Bại Của Trader Đến Từ Một Điểm <span className="text-emerald-650 bg-gradient-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent">Entry Sai Lầm!</span>
+            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 leading-tight font-display tracking-tight text-balance uppercase">
+              90% thất bại của trader bắt nguồn từ một <span className="text-[#39FF14] bg-gradient-to-r from-[#39FF14] to-teal-400 bg-clip-text text-transparent drop-shadow-[0_0_12px_rgba(57,255,20,0.3)]">Entry sai lầm.</span>
             </h1>
           </Reveal>
 
           <Reveal delay={180}>
-            <p className="text-sm sm:text-base md:text-lg text-slate-650 font-medium leading-relaxed max-w-2xl mx-auto text-balance">
-              Điểm entry (vùng vào lệnh) quyết định đến 80% xác suất chiến thắng và tỷ lệ rủi ro/lợi nhuận (R:R). Khi bạn vào lệnh bằng cảm xúc, sự phân vân hay nỗi sợ bỏ lỡ (FOMO), bạn đã tự đặt mình vào thế thua.
+            <p className="text-sm sm:text-base md:text-lg text-slate-750 font-medium leading-relaxed max-w-3xl mx-auto text-balance">
+              Toàn bộ tinh hoa của phân tích kỹ thuật suy cho cùng đều tập trung vào việc tìm kiếm một vùng vào lệnh hoàn hảo. Một Entry đẹp chính là chìa khóa vạn năng giúp bạn siết chặt rủi ro và đẩy xác suất thắng của Setup lên tới 80%. Vào lệnh có bài bản, dứt khoát loại bỏ FOMO!
             </p>
           </Reveal>
 
@@ -632,7 +663,7 @@ function UltimaPartnershipPage() {
             <div className="pt-6">
               <button 
                 onClick={() => scrollToRef(section4Ref)}
-                className="w-full sm:w-auto bg-emerald-600 hover:bg-emerald-700 active:scale-98 text-white font-bold text-sm sm:text-base px-8 py-4 sm:py-4.5 rounded-2xl transition-all shadow-lg shadow-emerald-600/10 flex items-center justify-center gap-2 max-w-md mx-auto"
+                className="w-full sm:w-auto bg-[#39FF14] hover:bg-[#39FF14]/90 active:scale-98 text-slate-950 font-black text-sm sm:text-base px-8 py-4 sm:py-4.5 rounded-2xl transition-all shadow-lg shadow-[#39FF14]/20 flex items-center justify-center gap-2 max-w-md mx-auto"
               >
                 <MousePointerClick className="w-5 h-5 animate-bounce" />
                 Trải nghiệm Entry AI Miễn Phí Ngay
@@ -657,11 +688,11 @@ function UltimaPartnershipPage() {
           <Reveal>
             <div className="text-center max-w-2xl mx-auto space-y-3 mb-10 md:mb-16">
               <span className="text-xs font-bold text-emerald-600 uppercase tracking-widest font-mono">Giải Pháp Đột Phá Từ AI</span>
-              <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight font-display text-balance">
-                Loại Bỏ Cảm Xúc Con Người – Đạt Xác Suất Vào Lệnh Thành Công Tới 70%
+              <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight font-display text-balance uppercase">
+                Xóa Bỏ Định Kiến Cảm Tính – Thiết Lập Tiêu Chuẩn Vào Lệnh Xác Suất 70%
               </h2>
-              <p className="text-slate-650 text-xs sm:text-sm text-balance">
-                Qi Prime không dựa vào trực giác. Chúng tôi vận hành hệ thống 6 AI Agents độc lập hoạt động realtime liên tục 24/7 để quét toàn bộ thị trường, bóc tách dữ liệu và chỉ đưa ra tín hiệu khi có sự hội tụ của các yếu tố cốt lõi:
+              <p className="text-slate-600 text-xs sm:text-sm text-balance leading-relaxed">
+                Qi Prime thay thế toàn bộ yếu tố tâm lý con người bằng một hạ tầng phân tích nghiêm ngặt. Hệ thống 6 AI Agents độc lập hoạt động realtime 24/7, quét sâu và xử lý dữ liệu toàn diện trên mọi khung thời gian. Chúng tôi không dự đoán thị trường, chúng tôi bắt thị trường phải đưa ra những xác nhận cốt lõi và rõ ràng nhất trước khi giải ngân.
               </p>
             </div>
           </Reveal>
@@ -784,11 +815,11 @@ function UltimaPartnershipPage() {
             {coopTab === "synergy" && (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch animate-fade-in">
                 {/* Qi Prime Card */}
-                <div className="p-6 sm:p-8 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between hover:border-emerald-500/30 transition-all shadow-sm">
+                <div className="p-6 sm:p-8 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between hover:border-[#39FF14]/30 transition-all shadow-sm">
                   <div className="space-y-4">
                     <div className="flex items-center gap-3">
-                      <img src="/assets/qiprime-official-logo.png" alt="Qi Prime" className="h-10 w-auto object-contain" />
-                      <span className="text-xs font-bold text-emerald-650 uppercase tracking-widest font-mono">Đơn Vị Công Nghệ</span>
+                      <QiPrimeLogoSVG isDarkBg={false} />
+                      <span className="text-xs font-bold text-emerald-700 uppercase tracking-widest font-mono">Đơn Vị Công Nghệ</span>
                     </div>
                     <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
                       <strong>Qi Prime</strong> là tổ chức công nghệ hàng đầu phát triển hệ sinh thái giao dịch tự động. Trục cốt lõi dựa trên 6 AI Agents giám sát dòng tiền lớn và phòng hộ tài khoản theo chuẩn quản trị rủi ro thể chế.
@@ -805,14 +836,14 @@ function UltimaPartnershipPage() {
                 </div>
 
                 {/* Ultima Markets Card */}
-                <div className="p-6 sm:p-8 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between hover:border-emerald-500/30 transition-all shadow-sm">
+                <div className="p-6 sm:p-8 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between hover:border-[#39FF14]/30 transition-all shadow-sm">
                   <div className="space-y-4">
                     <div className="flex items-center gap-3">
                       <div className="flex items-center gap-1.5">
                         <UltimaLogoSVG />
                         <span className="text-xs font-black tracking-widest text-slate-900 leading-none font-display">ULTIMA</span>
                       </div>
-                      <span className="text-xs font-bold text-emerald-650 uppercase tracking-widest font-mono">Đại Diện Hạ Tầng</span>
+                      <span className="text-xs font-bold text-emerald-750 uppercase tracking-widest font-mono">Đại Diện Hạ Tầng</span>
                     </div>
                     <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
                       <strong>Ultima Markets</strong> là nhà môi giới tài chính toàn cầu được cấp phép. Cung cấp nền tảng giao dịch thanh khoản sâu chuẩn thể chế với tốc độ khớp lệnh cực cao và an toàn tài khoản ký quỹ tuyệt đối.
@@ -906,7 +937,7 @@ function UltimaPartnershipPage() {
             </p>
             <button 
               onClick={() => scrollToRef(section4Ref)}
-              className="bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs px-5 py-3 rounded-xl transition-all whitespace-nowrap active:scale-95 shadow-sm"
+              className="bg-[#39FF14] hover:bg-[#39FF14]/90 text-slate-950 font-black text-xs px-5 py-3 rounded-xl transition-all whitespace-nowrap active:scale-95 shadow-sm"
             >
               Kích Hoạt Suất Free
             </button>
@@ -1309,30 +1340,26 @@ function UltimaPartnershipPage() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-slate-100 border-t border-slate-200 py-10 text-slate-500 text-xs">
+      {/* Footer (Nền tối đồng bộ với Header) */}
+      <footer className="bg-slate-950 border-t border-zinc-900 py-12 text-zinc-400 text-xs">
         <div className="max-w-7xl mx-auto px-4 space-y-6">
-          <div className="flex flex-col md:flex-row justify-between items-center gap-6 pb-6 border-b border-slate-205">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-6 pb-6 border-b border-zinc-800">
             <div className="flex items-center gap-3">
-              <img 
-                src="/assets/qiprime-official-logo.png" 
-                alt="Qi Prime" 
-                className="h-9 w-auto object-contain" 
-              />
-              <span className="h-4 w-px bg-slate-300"></span>
+              <QiPrimeLogoSVG isDarkBg={true} />
+              <span className="h-4 w-px bg-zinc-800"></span>
               <div className="flex items-center gap-1.5">
                 <UltimaLogoSVG />
                 <div className="flex flex-col">
-                  <span className="text-[10px] font-black tracking-widest text-slate-800 font-display">ULTIMA</span>
-                  <span className="text-[7px] tracking-wider text-emerald-650 font-bold font-mono">MARKETS</span>
+                  <span className="text-[10px] font-black tracking-widest text-white font-display">ULTIMA</span>
+                  <span className="text-[7px] tracking-wider text-[#a6ff00] font-bold font-mono">MARKETS</span>
                 </div>
               </div>
             </div>
             
-            <div className="flex gap-4 text-slate-600 font-semibold">
-              <a href="#" className="hover:text-emerald-650 transition-colors">Điều Khoản Dịch Vụ</a>
-              <a href="#" className="hover:text-emerald-650 transition-colors">Chính Sách Bảo Mật</a>
-              <a href="#" className="hover:text-emerald-650 transition-colors">Miễn Trừ Trách Nhiệm</a>
+            <div className="flex gap-4 text-zinc-300 font-semibold">
+              <a href="#" className="hover:text-[#39FF14] transition-colors">Điều Khoản Dịch Vụ</a>
+              <a href="#" className="hover:text-[#39FF14] transition-colors">Chính Sách Bảo Mật</a>
+              <a href="#" className="hover:text-[#39FF14] transition-colors">Miễn Trừ Trách Nhiệm</a>
             </div>
           </div>
 
@@ -1352,9 +1379,9 @@ function UltimaPartnershipPage() {
         <div className="fixed bottom-0 left-0 right-0 p-3 bg-white/95 backdrop-blur-md border-t border-slate-200 z-30 md:hidden animate-slide-up">
           <button
             onClick={() => scrollToRef(section4Ref)}
-            className="w-full py-3.5 rounded-xl bg-emerald-600 text-white font-bold text-sm uppercase active:scale-97 shadow-md shadow-emerald-600/10 flex items-center justify-center gap-1.5"
+            className="w-full py-3.5 rounded-xl bg-[#39FF14] text-slate-950 font-black text-sm uppercase active:scale-97 shadow-md shadow-[#39FF14]/20 flex items-center justify-center gap-1.5"
           >
-            <Sparkles className="w-4 h-4 animate-pulse text-white" />
+            <Sparkles className="w-4 h-4 animate-pulse text-slate-950" />
             Đăng ký nhận 1 trong 100 suất miễn phí
           </button>
         </div>
