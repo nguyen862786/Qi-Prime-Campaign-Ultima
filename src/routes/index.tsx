@@ -638,46 +638,62 @@ function UltimaPartnershipPage() {
         <div className="absolute top-1/4 right-0 w-[300px] h-[300px] bg-[#39FF14]/5 rounded-full filter blur-[100px] pointer-events-none"></div>
         <div className="absolute bottom-10 left-10 w-[200px] h-[200px] bg-blue-500/5 rounded-full filter blur-[80px] pointer-events-none"></div>
 
-        <div className="relative max-w-4xl mx-auto px-4 text-center space-y-6">
-          <Reveal delay={0} y={16}>
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-50 border border-rose-100 text-rose-600 text-[11px] font-bold uppercase tracking-wider mx-auto">
-              <AlertCircle className="w-3.5 h-3.5" />
-              Tử Huyệt Của 90% Nhà Giao Dịch
-            </div>
-          </Reveal>
+        <div className="relative max-w-7xl mx-auto px-4 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+          {/* Cột trái: Nội dung Hero */}
+          <div className="lg:col-span-7 text-center lg:text-left space-y-6 flex flex-col justify-center">
+            <Reveal delay={0} y={16} className="lg:mx-0 mx-auto">
+              <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-50 border border-rose-100 text-rose-600 text-[11px] font-bold uppercase tracking-wider">
+                <AlertCircle className="w-3.5 h-3.5" />
+                Tử Huyệt Của 90% Nhà Giao Dịch
+              </div>
+            </Reveal>
 
-          <Reveal delay={90}>
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 leading-tight font-display tracking-tight text-balance uppercase">
-              90% thất bại của trader bắt nguồn từ một <span className="text-[#39FF14] bg-gradient-to-r from-[#39FF14] to-teal-400 bg-clip-text text-transparent drop-shadow-[0_0_12px_rgba(57,255,20,0.3)]">Entry sai lầm.</span>
-            </h1>
-          </Reveal>
+            <Reveal delay={90}>
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 leading-tight font-display tracking-tight uppercase">
+                90% thất bại của trader bắt nguồn từ một <span className="text-[#39FF14] bg-gradient-to-r from-[#39FF14] to-teal-400 bg-clip-text text-transparent drop-shadow-[0_0_12px_rgba(57,255,20,0.3)]">Entry sai lầm.</span>
+              </h1>
+            </Reveal>
 
-          <Reveal delay={180}>
-            <p className="text-sm sm:text-base md:text-lg text-slate-750 font-medium leading-relaxed max-w-3xl mx-auto text-balance">
-              Toàn bộ tinh hoa của phân tích kỹ thuật suy cho cùng đều tập trung vào việc tìm kiếm một vùng vào lệnh hoàn hảo. Một Entry đẹp chính là chìa khóa vạn năng giúp bạn siết chặt rủi ro và đẩy xác suất thắng của Setup lên tới 80%. Vào lệnh có bài bản, dứt khoát loại bỏ FOMO!
-            </p>
-          </Reveal>
+            <Reveal delay={180}>
+              <p className="text-sm sm:text-base md:text-lg text-slate-700 font-medium leading-relaxed text-balance">
+                Toàn bộ tinh hoa của phân tích kỹ thuật suy cho cùng đều tập trung vào việc tìm kiếm một vùng vào lệnh hoàn hảo. Một Entry đẹp chính là chìa khóa vạn năng giúp bạn siết chặt rủi ro và đẩy xác suất thắng của Setup lên tới 80%. Vào lệnh có bài bản, dứt khoát loại bỏ FOMO!
+              </p>
+            </Reveal>
 
-          <Reveal delay={270}>
-            <div className="pt-6">
-              <button 
-                onClick={() => scrollToRef(section4Ref)}
-                className="w-full sm:w-auto bg-[#39FF14] hover:bg-[#39FF14]/90 active:scale-98 text-slate-950 font-black text-sm sm:text-base px-8 py-4 sm:py-4.5 rounded-2xl transition-all shadow-lg shadow-[#39FF14]/20 flex items-center justify-center gap-2 max-w-md mx-auto"
-              >
-                <MousePointerClick className="w-5 h-5 animate-bounce" />
-                Trải nghiệm Entry AI Miễn Phí Ngay
-              </button>
-            </div>
-          </Reveal>
+            <Reveal delay={270} className="lg:mx-0 mx-auto w-full max-w-md">
+              <div className="pt-6">
+                <button 
+                  onClick={() => scrollToRef(section4Ref)}
+                  className="w-full bg-[#39FF14] hover:bg-[#39FF14]/90 active:scale-98 text-slate-950 font-black text-sm sm:text-base px-8 py-4 sm:py-4.5 rounded-2xl transition-all shadow-lg shadow-[#39FF14]/20 flex items-center justify-center gap-2"
+                >
+                  <MousePointerClick className="w-5 h-5 animate-bounce" />
+                  Trải nghiệm Entry AI Miễn Phí Ngay
+                </button>
+              </div>
+            </Reveal>
 
-          {/* Huy hiệu thông số hệ thống */}
-          <Reveal delay={360}>
-            <div className="pt-8 flex justify-center items-center gap-6 text-xs text-slate-500 font-medium">
-              <span className="flex items-center gap-1"><ShieldCheck className="w-4 h-4 text-[#39FF14]" /> Phòng Hộ Sụt Giảm Vốn 15%</span>
-              <span className="w-1.5 h-1.5 rounded-full bg-slate-200"></span>
-              <span className="flex items-center gap-1"><Award className="w-4 h-4 text-[#39FF14]" /> Hạ Tầng Sàn Ultima</span>
-            </div>
-          </Reveal>
+            {/* Huy hiệu thông số hệ thống */}
+            <Reveal delay={360}>
+              <div className="pt-8 flex justify-center lg:justify-start items-center gap-6 text-xs text-slate-500 font-medium">
+                <span className="flex items-center gap-1"><ShieldCheck className="w-4 h-4 text-[#39FF14]" /> Phòng Hộ Sụt Giảm Vốn 15%</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-slate-200"></span>
+                <span className="flex items-center gap-1"><Award className="w-4 h-4 text-[#39FF14]" /> Hạ Tầng Sàn Ultima</span>
+              </div>
+            </Reveal>
+          </div>
+
+          {/* Cột phải: 3D Mascot của Qi Bot */}
+          <div className="lg:col-span-5 flex justify-center">
+            <Reveal delay={200} y={40}>
+              <TiltCard glow="rgba(57,255,20,0.25)">
+                <img 
+                  src="/assets/Mascot.png" 
+                  alt="Qi Bot Mascot" 
+                  className="w-full max-w-[280px] sm:max-w-[340px] h-auto object-contain rounded-2xl shadow-[0_0_50px_rgba(57,255,20,0.15)] border border-white/10"
+                />
+              </TiltCard>
+            </Reveal>
+          </div>
         </div>
       </section>
 
@@ -859,19 +875,32 @@ function UltimaPartnershipPage() {
                     </div>
                   </div>
                 </div>
+                
+                {/* Showcase Banner với thiết kế mới */}
+                <Reveal delay={200} y={40} className="w-full">
+                  <TiltCard glow="rgba(57,255,20,0.2)">
+                    <img 
+                      src="/assets/Smart Money Moves.jpg" 
+                      alt="Smart Money Moves" 
+                      className="w-full h-auto object-cover rounded-2xl shadow-[0_0_50px_rgba(57,255,20,0.15)] border border-white/10" 
+                    />
+                  </TiltCard>
+                </Reveal>
               </div>
             )}
 
             {coopTab === "years" && (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center animate-fade-in">
                 {/* Ảnh Banner 10 năm bản tiếng Việt */}
-                <div className="relative rounded-2xl border border-slate-200 overflow-hidden shadow-md">
-                  <img 
-                    src="/assets/ultima-10-years-vn.jpg" 
-                    alt="Ultima Markets 10 Năm Kiến Tạo Niềm Tin" 
-                    className="w-full h-auto object-cover" 
-                  />
-                </div>
+                <Reveal delay={150} y={40} className="w-full">
+                  <TiltCard glow="rgba(57,255,20,0.2)">
+                    <img 
+                      src="/assets/ultima-10-years-vn.jpg" 
+                      alt="Ultima Markets 10 Năm Kiến Tạo Niềm Tin" 
+                      className="w-full h-auto object-cover rounded-2xl shadow-[0_0_50px_rgba(57,255,20,0.15)] border border-white/10" 
+                    />
+                  </TiltCard>
+                </Reveal>
                 {/* Lời tự sự hành trình */}
                 <div className="space-y-5">
                   <span className="text-xs font-bold text-[#39FF14] uppercase tracking-widest font-mono">Kỷ Niệm Hành Trình 10 Năm</span>
@@ -883,7 +912,7 @@ function UltimaPartnershipPage() {
                   {/* Trustpilot Score Badge */}
                   <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between gap-4">
                     <div className="space-y-1">
-                      <img src="/assets/ultima-trustpilot-rating.png" alt="Trustpilot Great Score" className="h-8 w-auto object-contain" />
+                      <img src="/assets/ultima-trustpilot.png" alt="Trustpilot Great Score" className="h-8 w-auto object-contain rounded-lg" />
                       <p className="text-[10px] text-slate-500 font-medium">Đánh giá cực tốt dựa trên 585+ lượt bình luận thực tế.</p>
                     </div>
                     <div className="text-right flex-shrink-0">
@@ -920,13 +949,15 @@ function UltimaPartnershipPage() {
                   </div>
                 </div>
                 {/* Ảnh chứng nhận giải thưởng */}
-                <div className="relative rounded-2xl border border-slate-200 overflow-hidden shadow-md max-w-sm mx-auto">
-                  <img 
-                    src="/assets/ultima-awards-2026-poster.jpg" 
-                    alt="Brands Review Magazine Awards 2026 Certificate" 
-                    className="w-full h-auto object-cover" 
-                  />
-                </div>
+                <Reveal delay={150} y={40} className="w-full max-w-sm mx-auto">
+                  <TiltCard glow="rgba(57,255,20,0.2)">
+                    <img 
+                      src="/assets/ultima-awards-2026-poster.jpg" 
+                      alt="Brands Review Magazine Awards 2026 Certificate" 
+                      className="w-full h-auto object-cover rounded-2xl shadow-[0_0_50px_rgba(57,255,20,0.15)] border border-white/10" 
+                    />
+                  </TiltCard>
+                </Reveal>
               </div>
             )}
           </div>
@@ -1174,55 +1205,55 @@ function UltimaPartnershipPage() {
                   {/* Notch area */}
                   <div className="absolute top-2 left-1/2 -translate-x-1/2 w-20 h-4 bg-slate-900 rounded-full z-20"></div>
                   
-                  {/* Dynamic Screenshot */}
-                  <div className="w-full h-full relative z-10 select-none">
-                    {signalStep === 1 && (
-                      <img 
-                        src="/assets/signals-app-layer13.jpg" 
-                        alt="Trend Gate & Stochastic Indicator Screenshot" 
-                        className="w-full h-full object-cover animate-fade-in" 
-                      />
-                    )}
-                    {signalStep === 2 && (
-                      <img 
-                        src="/assets/signals-app-layer4.jpg" 
-                        alt="Order Flow Analysis Screenshot" 
-                        className="w-full h-full object-cover animate-fade-in" 
-                      />
-                    )}
-                    {signalStep === 3 && (
-                      <div className="w-full h-full relative animate-fade-in">
-                        {/* Sell/Buy sub-toggle button */}
-                        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 bg-slate-900/80 backdrop-blur px-2.5 py-1.5 rounded-lg flex gap-1.5 border border-slate-800 text-[10px]">
-                          <button 
-                            type="button" 
-                            onClick={(e) => { e.stopPropagation(); setToggleSubSignal("sell"); }}
-                            className={`px-2 py-0.5 rounded font-bold transition-all ${toggleSubSignal === "sell" ? "bg-red-500 text-white" : "text-zinc-400"}`}
-                          >
-                            BÁN (SELL)
-                          </button>
-                          <button 
-                            type="button" 
-                            onClick={(e) => { e.stopPropagation(); setToggleSubSignal("buy"); }}
-                            className={`px-2 py-0.5 rounded font-bold transition-all ${toggleSubSignal === "buy" ? "bg-[#39FF14] text-white" : "text-zinc-400"}`}
-                          >
-                            MUA (BUY)
-                          </button>
-                        </div>
-                        <img 
-                          src={toggleSubSignal === "sell" ? "/assets/signals-app-sell.jpg" : "/assets/signals-app-buy.jpg"} 
-                          alt="AI Signal Card Screenshot" 
-                          className="w-full h-full object-cover" 
-                        />
+                  {/* Dynamic Screenshot with smooth fade transition */}
+                  <div className="w-full h-full relative z-10 select-none bg-black">
+                    <img 
+                      src="/assets/signals-app-layer13.jpg" 
+                      alt="Trend Gate & Stochastic Indicator" 
+                      className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out ${signalStep === 1 ? "opacity-100 z-10" : "opacity-0 z-0"}`} 
+                    />
+                    <img 
+                      src="/assets/signals-app-layer4.jpg" 
+                      alt="Order Flow Analysis" 
+                      className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out ${signalStep === 2 ? "opacity-100 z-10" : "opacity-0 z-0"}`} 
+                    />
+                    
+                    {/* Step 3 has Buy/Sell toggle subsignal */}
+                    <div className={`absolute inset-0 w-full h-full transition-opacity duration-500 ease-in-out ${signalStep === 3 ? "opacity-100 z-10" : "opacity-0 z-0"}`}>
+                      {/* Sell/Buy sub-toggle button */}
+                      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 bg-slate-900/80 backdrop-blur px-2.5 py-1.5 rounded-lg flex gap-1.5 border border-slate-800 text-[10px]">
+                        <button 
+                          type="button" 
+                          onClick={(e) => { e.stopPropagation(); setToggleSubSignal("sell"); }}
+                          className={`px-2 py-0.5 rounded font-bold transition-all ${toggleSubSignal === "sell" ? "bg-red-500 text-white" : "text-zinc-400"}`}
+                        >
+                          BÁN (SELL)
+                        </button>
+                        <button 
+                          type="button" 
+                          onClick={(e) => { e.stopPropagation(); setToggleSubSignal("buy"); }}
+                          className={`px-2 py-0.5 rounded font-bold transition-all ${toggleSubSignal === "buy" ? "bg-[#39FF14] text-white" : "text-zinc-400"}`}
+                        >
+                          MUA (BUY)
+                        </button>
                       </div>
-                    )}
-                    {signalStep === 4 && (
                       <img 
-                        src="/assets/signals-tele-post.jpg" 
-                        alt="Telegram Channel Signals Post Screenshot" 
-                        className="w-full h-full object-cover animate-fade-in" 
+                        src="/assets/signals-app-sell.jpg" 
+                        alt="AI Signal Sell" 
+                        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${toggleSubSignal === "sell" ? "opacity-100" : "opacity-0"}`} 
                       />
-                    )}
+                      <img 
+                        src="/assets/signals-app-buy.jpg" 
+                        alt="AI Signal Buy" 
+                        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${toggleSubSignal === "buy" ? "opacity-100" : "opacity-0"}`} 
+                      />
+                    </div>
+                    
+                    <img 
+                      src="/assets/signals-tele-post.jpg" 
+                      alt="Telegram Channel Signals Post" 
+                      className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out ${signalStep === 4 ? "opacity-100 z-10" : "opacity-0 z-0"}`} 
+                    />
                   </div>
                 </div>
               </div>
