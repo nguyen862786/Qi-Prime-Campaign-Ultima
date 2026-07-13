@@ -1,6 +1,7 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@400;600;700;800&display=swap');
 
 @custom-variant dark (&:is(.dark *));
 
@@ -67,7 +68,8 @@
   --color-ob-dark-2: #1a293b;
   --color-ob-lime: #39FF14;
   --color-ob-lime-2: #39FF14;
-  --font-display: "Montserrat", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Sora", ui-sans-serif, system-ui, sans-serif;
   --font-mono: "Geist Mono", "JetBrains Mono", ui-monospace, Monaco, Menlo, monospace;
   --color-lime: var(--lime);
   --color-lime-foreground: var(--lime-foreground);
