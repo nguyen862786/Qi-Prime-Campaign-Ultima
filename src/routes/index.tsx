@@ -575,9 +575,9 @@ function UltimaPartnershipPage() {
             </a>
             <span className="h-5 w-px bg-zinc-800"></span>
             
-            {/* Logo Thương Hiệu Ultima — dùng trực tiếp file ảnh gốc, không tự vẽ SVG. Kéo dãy pill theo chiều ngang, chiều cao căn bằng logo Qi Prime (icon h-8) */}
-            <div className="bg-white px-4 sm:px-5 py-1.5 rounded-lg inline-flex items-center shadow-sm">
-              <img src="/assets/Logo chính Ultima.jpg" alt="Ultima" className="h-7 sm:h-8 w-auto object-contain" />
+            {/* Logo Thương Hiệu Ultima — bản crop khít viền trắng thừa của file gốc (không vẽ lại), chữ "Ultima" giờ có trọng lượng thị giác ngang QI PRIME */}
+            <div className="bg-white px-2 py-1 rounded-lg inline-flex items-center shadow-sm">
+              <img src="/assets/logo-ultima-tight.png" alt="Ultima" className="h-10 sm:h-11 w-auto object-contain" />
             </div>
           </div>
 
@@ -810,7 +810,7 @@ function UltimaPartnershipPage() {
                   <div className="space-y-4">
                     <div className="flex items-center gap-3">
                       <div className="bg-white px-2.5 py-1.5 rounded-xl inline-flex items-center shadow-md border border-zinc-800">
-                        <img src="/assets/Logo chính Ultima.jpg" alt="Ultima" className="h-10 w-auto object-contain" />
+                        <img src="/assets/logo-ultima-tight.png" alt="Ultima" className="h-9 w-auto object-contain" />
                       </div>
                       <span className="text-xs font-bold text-black bg-[#C6FF00] px-3 py-1.5 rounded-full uppercase tracking-widest font-mono">Đại Diện Hạ Tầng</span>
                     </div>
@@ -1174,8 +1174,8 @@ function UltimaPartnershipPage() {
             <div className="flex items-center gap-3">
               <QiPrimeLogoSVG />
               <span className="h-4 w-px bg-zinc-800"></span>
-              <div className="bg-white px-4 sm:px-5 py-1.5 rounded-lg inline-flex items-center shadow-sm">
-                <img src="/assets/Logo chính Ultima.jpg" alt="Ultima" className="h-7 sm:h-8 w-auto object-contain" />
+              <div className="bg-white px-2 py-1 rounded-lg inline-flex items-center shadow-sm">
+                <img src="/assets/logo-ultima-tight.png" alt="Ultima" className="h-10 sm:h-11 w-auto object-contain" />
               </div>
             </div>
             
