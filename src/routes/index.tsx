@@ -172,7 +172,7 @@ function Reveal({
 function TiltCard({
   children,
   className = "",
-  glow = "rgba(16,185,129,0.16)"
+  glow = "rgba(198,255,0,0.16)"
 }: {
   children: React.ReactNode;
   className?: string;
@@ -288,7 +288,7 @@ function ParticleField() {
           const dist = Math.hypot(dx, dy);
           if (dist < 120) {
             const op = (1 - dist / 120) * 0.22;
-            ctx.strokeStyle = `rgba(16,185,129,${op})`;
+            ctx.strokeStyle = `rgba(198,255,0,${op})`;
             ctx.lineWidth = 1;
             ctx.beginPath();
             ctx.moveTo(a.x, a.y);
@@ -302,7 +302,7 @@ function ParticleField() {
       for (const p of particles) {
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = "rgba(16,185,129,0.55)";
+        ctx.fillStyle = "rgba(198,255,0,0.55)";
         ctx.fill();
       }
 
@@ -342,9 +342,6 @@ function ParticleField() {
 }
 
 function UltimaPartnershipPage() {
-  // Trạng thái tab hiển thị phần Hợp tác đối tác (Mặc định: synergy)
-  const [coopTab, setCoopTab] = useState<"synergy" | "years" | "awards">("synergy");
-
   // Trạng thái bước hiển thị cách tính tín hiệu của Qi Prime
   const [signalStep, setSignalStep] = useState<1 | 2 | 3 | 4>(1);
   const [toggleSubSignal, setToggleSubSignal] = useState<"sell" | "buy">("sell");
@@ -661,14 +658,14 @@ function UltimaPartnershipPage() {
             </Reveal>
           </div>
 
-          {/* Cột phải: 3D Mascot của Qi Bot */}
+          {/* Cột phải: Màn hình biểu đồ kỹ thuật (nến) — không khí trading chuyên nghiệp */}
           <div className="lg:col-span-5 flex justify-center px-6 sm:px-0">
             <Reveal delay={200} y={40} className="w-full flex justify-center">
               <TiltCard glow="rgba(198,255,0,0.25)">
                 <img
-                  src="/assets/Mascot.png"
-                  alt="Qi Bot Mascot"
-                  className="w-full max-w-[250px] sm:max-w-[340px] h-auto object-contain rounded-2xl shadow-[0_0_50px_rgba(198,255,0,0.15)] border border-white/10 mx-auto"
+                  src="/assets/nen.jpg"
+                  alt="Biểu đồ nến kỹ thuật Qi Prime"
+                  className="w-full max-w-[280px] sm:max-w-[380px] h-auto object-cover rounded-2xl shadow-[0_0_50px_rgba(198,255,0,0.15)] border border-white/10 mx-auto"
                 />
               </TiltCard>
             </Reveal>
@@ -679,17 +676,29 @@ function UltimaPartnershipPage() {
       {/* SECTION 2: BREAKTHROUGH SOLUTION – 6 AI AGENTS (Nền sáng, Screen 2) */}
       <section ref={section2Ref} className="py-16 md:py-24 bg-slate-50 border-b border-slate-200/50">
         <div className="max-w-7xl mx-auto px-4">
-          <Reveal>
-            <div className="text-center max-w-2xl mx-auto space-y-3 mb-10 md:mb-16">
-              <span className="text-xs font-bold text-[#C6FF00] uppercase tracking-widest font-mono">Giải Pháp Đột Phá Từ AI</span>
-              <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight font-display text-balance uppercase">
-                Xóa Bỏ Định Kiến Cảm Tính – Thiết Lập Tiêu Chuẩn Vào Lệnh Xác Suất 70%
-              </h2>
-              <p className="text-slate-600 text-xs sm:text-sm text-balance leading-relaxed">
-                Qi Prime thay thế toàn bộ yếu tố tâm lý con người bằng một hạ tầng phân tích nghiêm ngặt. Hệ thống 6 AI Agents độc lập hoạt động realtime 24/7, quét sâu và xử lý dữ liệu toàn diện trên mọi khung thời gian. Chúng tôi không dự đoán thị trường, chúng tôi bắt thị trường phải đưa ra những xác nhận cốt lõi và rõ ràng nhất trước khi giải ngân.
-              </p>
-            </div>
-          </Reveal>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center mb-10 md:mb-16">
+            <Reveal className="lg:col-span-8">
+              <div className="text-center lg:text-left max-w-2xl mx-auto lg:mx-0 space-y-3">
+                <span className="text-xs font-bold text-[#C6FF00] uppercase tracking-widest font-mono">Giải Pháp Đột Phá Từ AI</span>
+                <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight font-display text-balance uppercase">
+                  Xóa Bỏ Định Kiến Cảm Tính – Thiết Lập Tiêu Chuẩn Vào Lệnh Xác Suất 70%
+                </h2>
+                <p className="text-slate-600 text-xs sm:text-sm text-balance leading-relaxed">
+                  Qi Prime thay thế toàn bộ yếu tố tâm lý con người bằng một hạ tầng phân tích nghiêm ngặt. Hệ thống 6 AI Agents độc lập hoạt động realtime 24/7, quét sâu và xử lý dữ liệu toàn diện trên mọi khung thời gian. Chúng tôi không dự đoán thị trường, chúng tôi bắt thị trường phải đưa ra những xác nhận cốt lõi và rõ ràng nhất trước khi giải ngân.
+                </p>
+              </div>
+            </Reveal>
+            {/* Mascot Qi Bot — chuyển từ Hero xuống làm hình ảnh bổ trợ trực quan cho khối 6 AI Agents */}
+            <Reveal delay={150} y={30} className="lg:col-span-4 flex justify-center px-10 sm:px-16 lg:px-0">
+              <TiltCard glow="rgba(198,255,0,0.22)">
+                <img
+                  src="/assets/Mascot.png"
+                  alt="Qi Bot Mascot — 6 AI Agents"
+                  className="w-full max-w-[180px] sm:max-w-[220px] h-auto object-contain rounded-2xl shadow-[0_0_40px_rgba(198,255,0,0.15)] border border-white/10 mx-auto"
+                />
+              </TiltCard>
+            </Reveal>
+          </div>
 
           {/* Hiển thị dạng lưới trên Desktop (Bị ẩn trên Mobile) — thêm Tilt 3D + phát sáng viền */}
           <div className="hidden md:grid grid-cols-2 lg:grid-cols-3 gap-6">
@@ -782,32 +791,10 @@ function UltimaPartnershipPage() {
             </div>
           </Reveal>
 
-          {/* Điều hướng Tab phong cách tối giản, nền sáng */}
-          <div className="flex bg-slate-100 p-1.5 rounded-xl border border-slate-200 max-w-lg mx-auto gap-2">
-            {[
-              { id: "synergy", label: "Cộng Hưởng Thế Mạnh" },
-              { id: "years", label: "Hành Trình 10 Năm" },
-              { id: "awards", label: "Chứng Nhận Giải Thưởng" }
-            ].map((tab) => (
-              <button
-                key={tab.id}
-                type="button"
-                onClick={() => setCoopTab(tab.id as any)}
-                className={`flex-1 py-3 text-xs font-bold rounded-lg transition-all active:scale-95 whitespace-nowrap ${
-                  coopTab === tab.id
-                    ? "bg-[#C6FF00] text-slate-950 shadow-md shadow-[#C6FF00]/20"
-                    : "text-slate-600 hover:text-slate-900"
-                }`}
-              >
-                {tab.label}
-              </button>
-            ))}
-          </div>
-
-          {/* Hiển thị nội dung Tab */}
-          <div className="pt-4 min-h-[350px]">
-            {coopTab === "synergy" && (
-              <div className="space-y-8 animate-fade-in">
+          {/* Nội dung dàn phẳng, cuộn dọc liên tục — đã bỏ hệ thống Tab điều hướng */}
+          <div className="space-y-16 pt-2">
+            {/* KHỐI 1: Cặp đôi song hành Qi Prime x Ultima Markets */}
+            <Reveal delay={100} y={20}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
                 {/* Qi Prime Card */}
                 <div className="p-6 sm:p-8 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between hover:border-[#C6FF00]/30 transition-all shadow-sm">
@@ -832,15 +819,15 @@ function UltimaPartnershipPage() {
                   </div>
                 </div>
 
-                {/* Ultima Markets Card */}
+                {/* Ultima Markets Card — khung bọc logo đối xứng tuyệt đối với Qi Prime */}
                 <div className="p-6 sm:p-8 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between hover:border-[#C6FF00]/30 transition-all shadow-sm">
                   <div className="space-y-4">
                     <div className="flex items-center gap-3">
-                      <div className="flex items-center gap-1.5">
+                      <div className="bg-slate-950 px-3.5 py-2 rounded-xl inline-flex items-center gap-1.5 shadow-md border border-zinc-800">
                         <UltimaLogoSVG />
-                        <span className="text-xs font-black tracking-widest text-slate-900 leading-none font-display">ULTIMA</span>
+                        <span className="text-xs font-black tracking-widest text-white leading-none font-display">ULTIMA</span>
                       </div>
-                      <span className="text-xs font-bold text-[#C6FF00] uppercase tracking-widest font-mono">Đại Diện Hạ Tầng</span>
+                      <span className="text-xs font-bold text-[#C6FF00] bg-[#C6FF00]/15 px-3 py-1.5 rounded-full uppercase tracking-widest font-mono">Đại Diện Hạ Tầng</span>
                     </div>
                     <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
                       <strong>Ultima Markets</strong> là nhà môi giới tài chính toàn cầu được cấp phép. Cung cấp nền tảng giao dịch thanh khoản sâu chuẩn thể chế với tốc độ khớp lệnh cực cao và an toàn tài khoản ký quỹ tuyệt đối.
@@ -856,32 +843,19 @@ function UltimaPartnershipPage() {
                   </div>
                 </div>
               </div>
+            </Reveal>
 
-              {/* Showcase Banner Smart Money Moves — banner độc lập, full-width, căn giữa, không còn kẹt trong lưới 2 cột */}
-              <Reveal delay={200} y={30}>
-                <TiltCard glow="rgba(198,255,0,0.2)" className="w-full max-w-5xl mx-auto">
+            {/* KHỐI 2: Hành trình phát triển — 10 Năm Kiến Tạo Niềm Tin */}
+            <Reveal delay={200} y={30}>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                {/* Ảnh Banner 10 năm bản tiếng Việt */}
+                <TiltCard glow="rgba(198,255,0,0.2)" className="w-full">
                   <img
-                    src="/assets/Smart Money Moves.jpg"
-                    alt="Smart Money Moves"
-                    className="w-full h-auto object-cover rounded-2xl shadow-[0_0_40px_rgba(198,255,0,0.12)] border border-white/10"
+                    src="/assets/ultima-10-years-vn.jpg"
+                    alt="Ultima Markets 10 Năm Kiến Tạo Niềm Tin"
+                    className="w-full h-auto object-cover rounded-2xl shadow-[0_0_50px_rgba(198,255,0,0.15)] border border-white/10"
                   />
                 </TiltCard>
-              </Reveal>
-              </div>
-            )}
-
-            {coopTab === "years" && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center animate-fade-in">
-                {/* Ảnh Banner 10 năm bản tiếng Việt */}
-                <Reveal delay={150} y={40} className="w-full">
-                  <TiltCard glow="rgba(198,255,0,0.2)">
-                    <img 
-                      src="/assets/ultima-10-years-vn.jpg" 
-                      alt="Ultima Markets 10 Năm Kiến Tạo Niềm Tin" 
-                      className="w-full h-auto object-cover rounded-2xl shadow-[0_0_50px_rgba(198,255,0,0.15)] border border-white/10" 
-                    />
-                  </TiltCard>
-                </Reveal>
                 {/* Lời tự sự hành trình */}
                 <div className="space-y-5">
                   <span className="text-xs font-bold text-[#C6FF00] uppercase tracking-widest font-mono">Kỷ Niệm Hành Trình 10 Năm</span>
@@ -889,7 +863,7 @@ function UltimaPartnershipPage() {
                   <p className="text-slate-650 text-xs sm:text-sm leading-relaxed">
                     Trải qua một thập kỷ hình thành và phát triển bền vững, Ultima Markets đã khẳng định vị thế vững chắc của mình trên thị trường tài chính thế giới. Sự kiện 10 năm kiến tạo niềm tin minh chứng cho cam kết về tính minh bạch, an toàn và hiệu năng công nghệ mà Ultima dành cho khách hàng.
                   </p>
-                  
+
                   {/* Trustpilot Score Badge */}
                   <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between gap-4">
                     <div className="space-y-1">
@@ -903,15 +877,16 @@ function UltimaPartnershipPage() {
                   </div>
                 </div>
               </div>
-            )}
+            </Reveal>
 
-            {coopTab === "awards" && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center animate-fade-in">
+            {/* KHỐI 3: Vinh danh & Chứng nhận Giải thưởng */}
+            <Reveal delay={300} y={30}>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                 {/* Danh sách giải thưởng */}
                 <div className="space-y-4 text-left">
                   <span className="text-xs font-bold text-[#C6FF00] uppercase tracking-widest font-mono block mb-2">Brands Review Magazine Awards 2026</span>
                   <h3 className="text-xl font-bold text-slate-900 mb-4">Các Hạng Mục Vinh Danh Danh Giá</h3>
-                  
+
                   <div className="space-y-3">
                     {[
                       "Nhà môi giới Forex tốt nhất Châu Á 2026",
@@ -930,17 +905,15 @@ function UltimaPartnershipPage() {
                   </div>
                 </div>
                 {/* Ảnh chứng nhận giải thưởng */}
-                <Reveal delay={150} y={40} className="w-full max-w-sm mx-auto">
-                  <TiltCard glow="rgba(198,255,0,0.2)">
-                    <img 
-                      src="/assets/ultima-awards-2026-poster.jpg" 
-                      alt="Brands Review Magazine Awards 2026 Certificate" 
-                      className="w-full h-auto object-cover rounded-2xl shadow-[0_0_50px_rgba(198,255,0,0.15)] border border-white/10" 
-                    />
-                  </TiltCard>
-                </Reveal>
+                <TiltCard glow="rgba(198,255,0,0.2)" className="w-full max-w-sm mx-auto">
+                  <img
+                    src="/assets/ultima-awards-2026-poster.jpg"
+                    alt="Brands Review Magazine Awards 2026 Certificate"
+                    className="w-full h-auto object-cover rounded-2xl shadow-[0_0_50px_rgba(198,255,0,0.15)] border border-white/10"
+                  />
+                </TiltCard>
               </div>
-            )}
+            </Reveal>
           </div>
 
           {/* Khối tóm tắt cộng hưởng thế mạnh */}
