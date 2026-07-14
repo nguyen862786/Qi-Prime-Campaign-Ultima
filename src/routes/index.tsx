@@ -575,9 +575,9 @@ function UltimaPartnershipPage() {
             </a>
             <span className="h-5 w-px bg-zinc-800"></span>
             
-            {/* Logo Thương Hiệu Ultima — bản crop khít viền trắng thừa của file gốc (không vẽ lại). Tăng +25% so với vòng trước, hộp bọc giảm tối đa padding để ảnh bung to */}
-            <div className="bg-white px-1.5 py-1 rounded-lg inline-flex items-center shadow-sm">
-              <img src="/assets/logo-ultima-tight.png" alt="Ultima" className="h-12 sm:h-14 w-auto object-contain" />
+            {/* Logo Thương Hiệu Ultima — bản crop khít viền trắng thừa của file gốc (không vẽ lại). Fix cứng h-8 để chữ Ultima cao bằng chữ QI PRIME, không lấn át bố cục Header */}
+            <div className="bg-white px-2 py-1 rounded-lg inline-flex items-center shadow-sm">
+              <img src="/assets/logo-ultima-tight.png" alt="Ultima" className="h-8 w-auto object-contain" />
             </div>
           </div>
 
@@ -1174,8 +1174,8 @@ function UltimaPartnershipPage() {
             <div className="flex items-center gap-3">
               <QiPrimeLogoSVG />
               <span className="h-4 w-px bg-zinc-800"></span>
-              <div className="bg-white px-1.5 py-1 rounded-lg inline-flex items-center shadow-sm">
-                <img src="/assets/logo-ultima-tight.png" alt="Ultima" className="h-12 sm:h-14 w-auto object-contain" />
+              <div className="bg-white px-3 py-1.5 rounded-lg inline-flex items-center shadow-sm">
+                <img src="/assets/logo-ultima-tight.png" alt="Ultima" className="h-8 w-auto object-contain" />
               </div>
             </div>
             
