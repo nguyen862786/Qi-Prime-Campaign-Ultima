@@ -577,7 +577,7 @@ function UltimaPartnershipPage() {
             
             {/* Logo Thương Hiệu Ultima — dùng trực tiếp file ảnh gốc, không tự vẽ SVG */}
             <div className="bg-white px-2 py-1 rounded-lg inline-flex items-center shadow-sm">
-              <img src="/assets/Logo chính Ultima.jpg" alt="Ultima" className="h-4 sm:h-5 w-auto object-contain" />
+              <img src="/assets/Logo chính Ultima.jpg" alt="Ultima" className="h-9 sm:h-10 w-auto object-contain" />
             </div>
           </div>
 
@@ -809,8 +809,8 @@ function UltimaPartnershipPage() {
                 <div className="p-6 sm:p-8 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between hover:border-[#C6FF00]/30 transition-all shadow-sm">
                   <div className="space-y-4">
                     <div className="flex items-center gap-3">
-                      <div className="bg-white px-3.5 py-2 rounded-xl inline-flex items-center shadow-md border border-zinc-800">
-                        <img src="/assets/Logo chính Ultima.jpg" alt="Ultima" className="h-6 w-auto object-contain" />
+                      <div className="bg-white px-2.5 py-1.5 rounded-xl inline-flex items-center shadow-md border border-zinc-800">
+                        <img src="/assets/Logo chính Ultima.jpg" alt="Ultima" className="h-10 w-auto object-contain" />
                       </div>
                       <span className="text-xs font-bold text-black bg-[#C6FF00] px-3 py-1.5 rounded-full uppercase tracking-widest font-mono">Đại Diện Hạ Tầng</span>
                     </div>
@@ -897,6 +897,18 @@ function UltimaPartnershipPage() {
                     className="w-full h-auto object-cover rounded-2xl shadow-[0_0_50px_rgba(198,255,0,0.15)] border border-white/10"
                   />
                 </TiltCard>
+              </div>
+            </Reveal>
+
+            {/* Chứng nhận Trustpilot — độc lập, không kèm caption, quầng sáng neon ẩn phía sau */}
+            <Reveal delay={350} y={30}>
+              <div className="relative flex justify-center py-2">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[380px] h-[380px] bg-[#C6FF00]/10 rounded-full filter blur-[110px] pointer-events-none"></div>
+                <img
+                  src="/assets/logos/ultima-trustpilot.png"
+                  alt="Ultima Markets Trustpilot Rating"
+                  className="w-full max-w-md mx-auto object-contain rounded-2xl shadow-lg border border-neutral-800 relative z-10"
+                />
               </div>
             </Reveal>
           </div>
