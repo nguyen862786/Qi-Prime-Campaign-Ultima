@@ -617,19 +617,19 @@ function UltimaPartnershipPage() {
             <Reveal delay={0} y={16} className="lg:mx-0 mx-auto">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-50 border border-rose-100 text-rose-600 text-[11px] font-bold uppercase tracking-wider">
                 <AlertCircle className="w-3.5 h-3.5" />
-                Tử Huyệt Của 90% Nhà Giao Dịch
+                Tiêu Chuẩn Setup Kỹ Thuật Cao Cấp
               </div>
             </Reveal>
 
             <Reveal delay={90}>
-              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 leading-tight font-display tracking-tight uppercase">
-                90% thất bại của trader bắt nguồn từ một <span className="text-slate-950 bg-[#C6FF00] px-2 rounded-md box-decoration-clone shadow-[0_0_20px_rgba(198,255,0,0.4)]">Entry sai lầm.</span>
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-black leading-tight font-display tracking-tight uppercase">
+                Tìm Kiếm Entry Hoàn Hảo: Yếu Tố Cốt Lõi Để <span className="text-black bg-[#C6FF00] px-2 rounded-md box-decoration-clone shadow-[0_0_20px_rgba(198,255,0,0.4)]">Xoay Chuyển Hiệu Suất Trading</span>
               </h1>
             </Reveal>
 
             <Reveal delay={180} className="px-3 sm:px-0">
-              <p className="text-sm sm:text-base md:text-lg text-slate-700 font-medium leading-7 sm:leading-8 text-balance">
-                Toàn bộ tinh hoa của phân tích kỹ thuật suy cho cùng đều tập trung vào việc tìm kiếm một vùng vào lệnh hoàn hảo. Một Entry đẹp chính là chìa khóa vạn năng giúp bạn siết chặt rủi ro và đẩy xác suất thắng của Setup lên tới 80%. Vào lệnh có bài bản, dứt khoát loại bỏ FOMO!
+              <p className="text-sm sm:text-base md:text-lg text-black font-medium leading-7 sm:leading-8 text-balance">
+                Toàn bộ tinh hoa của phân tích kỹ thuật suy cho cùng đều tập trung vào việc định vị một vùng vào lệnh tối ưu. Một Entry chuẩn xác chính là điểm tựa vững chắc giúp bạn siết chặt quản trị rủi ro, tối đa hóa biên độ lợi nhuận và đẩy <span className="text-black bg-[#C6FF00] px-1.5 rounded-md box-decoration-clone">xác suất thắng của Setup lên tới 80%</span>. Vào lệnh có bài bản, dứt khoát làm chủ cuộc chơi!
               </p>
             </Reveal>
 
