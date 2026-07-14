@@ -509,16 +509,6 @@ function UltimaPartnershipPage() {
     }
   };
 
-  // Vẽ biểu tượng SVG chính thức của thương hiệu Ultima (2 cột song song màu xanh Lime)
-  const UltimaLogoSVG = () => (
-    <svg width="24" height="24" viewBox="0 0 32 32" fill="none" className="flex-shrink-0 text-[#C6FF00]">
-      {/* Cột xiên bên trái (Màu Xanh Chanh) */}
-      <path d="M6 10 L15 14 L15 30 L6 26 Z" fill="currentColor" />
-      {/* Cột xiên bên phải (Màu Xanh Chanh) */}
-      <path d="M17 6 L26 10 L26 26 L17 22 Z" fill="currentColor" />
-    </svg>
-  );
-
   // Logo Qi Prime chính thức — dùng đúng file ảnh nhận diện thương hiệu thay vì SVG vẽ tay
   const QiPrimeLogoSVG = () => (
     <div className="flex items-center gap-2">
@@ -585,10 +575,9 @@ function UltimaPartnershipPage() {
             </a>
             <span className="h-5 w-px bg-zinc-800"></span>
             
-            {/* Logo Thương Hiệu Ultima (Pill nền trắng, chỉ hiển thị "Ultima", chữ đen) */}
-            <div className="bg-white px-2 py-1 rounded-lg inline-flex items-center gap-1.5 shadow-sm">
-              <UltimaLogoSVG />
-              <span className="text-[11px] font-black tracking-widest text-black leading-none font-display">ULTIMA</span>
+            {/* Logo Thương Hiệu Ultima — dùng trực tiếp file ảnh gốc, không tự vẽ SVG */}
+            <div className="bg-white px-2 py-1 rounded-lg inline-flex items-center shadow-sm">
+              <img src="/assets/Logo chính Ultima.jpg" alt="Ultima" className="h-4 sm:h-5 w-auto object-contain" />
             </div>
           </div>
 
@@ -629,7 +618,7 @@ function UltimaPartnershipPage() {
 
             <Reveal delay={180} className="px-3 sm:px-0">
               <p className="text-sm sm:text-base md:text-lg text-black font-medium leading-7 sm:leading-8 text-balance">
-                Toàn bộ tinh hoa của phân tích kỹ thuật suy cho cùng đều tập trung vào việc định vị một vùng vào lệnh tối ưu. Một Entry chuẩn xác chính là điểm tựa vững chắc giúp bạn siết chặt quản trị rủi ro, tối đa hóa biên độ lợi nhuận và đẩy <span className="text-black bg-[#C6FF00] px-1.5 rounded-md box-decoration-clone">xác suất thắng của Setup lên tới 80%</span>. Vào lệnh có bài bản, dứt khoát làm chủ cuộc chơi!
+                Toàn bộ tinh hoa của phân tích kỹ thuật suy cho cùng đều tập trung vào việc định vị một vùng vào lệnh tối ưu. Một Entry chuẩn xác chính là điểm tựa vững chắc giúp bạn siết chặt quản trị rủi ro, tối đa hóa biên độ lợi nhuận và đẩy <span className="text-black bg-[#C6FF00] px-1.5 rounded-md box-decoration-clone">xác suất thắng của Setup lên tới 70%</span>. Vào lệnh có bài bản, dứt khoát làm chủ cuộc chơi!
               </p>
             </Reveal>
 
@@ -820,9 +809,8 @@ function UltimaPartnershipPage() {
                 <div className="p-6 sm:p-8 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between hover:border-[#C6FF00]/30 transition-all shadow-sm">
                   <div className="space-y-4">
                     <div className="flex items-center gap-3">
-                      <div className="bg-white px-3.5 py-2 rounded-xl inline-flex items-center gap-1.5 shadow-md border border-zinc-800">
-                        <UltimaLogoSVG />
-                        <span className="text-xs font-black tracking-widest text-black leading-none font-display">ULTIMA</span>
+                      <div className="bg-white px-3.5 py-2 rounded-xl inline-flex items-center shadow-md border border-zinc-800">
+                        <img src="/assets/Logo chính Ultima.jpg" alt="Ultima" className="h-6 w-auto object-contain" />
                       </div>
                       <span className="text-xs font-bold text-black bg-[#C6FF00] px-3 py-1.5 rounded-full uppercase tracking-widest font-mono">Đại Diện Hạ Tầng</span>
                     </div>
@@ -1174,9 +1162,8 @@ function UltimaPartnershipPage() {
             <div className="flex items-center gap-3">
               <QiPrimeLogoSVG />
               <span className="h-4 w-px bg-zinc-800"></span>
-              <div className="bg-white px-2 py-1 rounded-lg inline-flex items-center gap-1.5 shadow-sm">
-                <UltimaLogoSVG />
-                <span className="text-[10px] font-black tracking-widest text-black font-display">ULTIMA</span>
+              <div className="bg-white px-2 py-1 rounded-lg inline-flex items-center shadow-sm">
+                <img src="/assets/Logo chính Ultima.jpg" alt="Ultima" className="h-4 w-auto object-contain" />
               </div>
             </div>
             
