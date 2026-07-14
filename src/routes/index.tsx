@@ -88,20 +88,12 @@ const AI_AGENTS = [
   }
 ];
 
-// Danh sách lệnh chạm TP mẫu được dịch sang tiếng Việt
-const INITIAL_TRADES = [
-  { pair: "XAUUSD", side: "MUA", price: 2382.40, tp: 2388.90, pips: 65, time: "2 phút trước" },
-  { pair: "EURUSD", side: "BÁN", price: 1.0895, tp: 1.0868, pips: 27, time: "5 phút trước" },
-  { pair: "GBPUSD", side: "MUA", price: 1.2725, tp: 1.2760, pips: 35, time: "9 phút trước" },
-  { pair: "XAUUSD", side: "BÁN", price: 2391.20, tp: 2384.80, pips: 64, time: "15 phút trước" }
-];
-
-// Định nghĩa thông số tỷ giá cho thanh ticker chạy realtime ở đầu trang
-const rates = {
-  xau: 2382.40,
-  xauDiff: 0.45,
+// Giá mặc định ban đầu cho thanh ticker (hiển thị ngay trước khi API trả về, tránh nháy 0)
+const DEFAULT_RATES = {
+  xau: 4150,
+  xauDiff: 0,
   eur: 1.0895,
-  eurDiff: -0.12
+  eurDiff: 0
 };
 
 function generateQip() {
@@ -360,8 +352,8 @@ function UltimaPartnershipPage() {
   // Chỉ số slide của agent đang hoạt động cho Section 2 (Mobile Swiper)
   const [activeAgentIdx, setActiveAgentIdx] = useState(0);
 
-  // Trạng thái danh sách lệnh chạm TP realtime
-  const [liveTrades, setLiveTrades] = useState(INITIAL_TRADES);
+  // Thông số tỷ giá cho thanh ticker — khởi tạo bằng giá mặc định, sau đó nạp realtime từ Binance
+  const [rates, setRates] = useState(DEFAULT_RATES);
 
   // Trạng thái khan hiếm (số suất và bộ đếm ngược)
   const [slotsLeft, setSlotsLeft] = useState(31);
@@ -379,9 +371,6 @@ function UltimaPartnershipPage() {
 
   const section2Ref = useRef<HTMLDivElement>(null);
   const section4Ref = useRef<HTMLDivElement>(null);
-
-  // Kích hoạt hiệu ứng vẽ đường biểu đồ PnL khi cuộn tới (Stroke Dasharray Animation)
-  const chart = useInView<HTMLDivElement>();
 
   // Hàm hỗ trợ cuộn mượt đến phần mong muốn
   const scrollToRef = (ref: React.RefObject<HTMLDivElement | null>) => {
@@ -417,36 +406,38 @@ function UltimaPartnershipPage() {
     return () => clearInterval(timer);
   }, []);
 
-  // 3. Mô phỏng tín hiệu chạm TP mới sau mỗi 18 giây
+  // 3. Nạp tỷ giá realtime cho thanh ticker từ Binance (nguồn dữ liệu mở, public, không cần API key)
+  //    XAU dùng PAXGUSDT (token vàng quy đổi 1:1 theo ounce, giá bám sát vàng giao ngay) làm giá tham chiếu.
   useEffect(() => {
-    const interval = setInterval(() => {
-      const pairs = ["XAUUSD", "EURUSD", "GBPUSD", "USDJPY"];
-      const pair = pairs[Math.floor(Math.random() * pairs.length)];
-      const side = Math.random() > 0.5 ? "MUA" : "BÁN";
-      const isGold = pair === "XAUUSD";
-      const entry = isGold ? Number((rand(2380, 2430)).toFixed(2)) : Number((rand(1.08, 1.30)).toFixed(4));
-      const pips = isGold ? Math.floor(rand(50, 90)) : Math.floor(rand(20, 45));
-      const tp = side === "MUA" 
-        ? (isGold ? entry + pips/10 : entry + pips/10000) 
-        : (isGold ? entry - pips/10 : entry - pips/10000);
-      
-      const newTrade = {
-        pair,
-        side,
-        price: Number(entry),
-        tp: Number(isGold ? tp.toFixed(2) : tp.toFixed(4)),
-        pips,
-        time: "Vừa chạm TP"
-      };
+    let cancelled = false;
 
-      setLiveTrades(prev => [newTrade, ...prev.slice(0, 3)]);
-      toast.success(`🎯 AI Tín Hiệu: ${pair} ${side} đã chạm TP (+${pips} pips)!`, {
-        icon: "🎯",
-        duration: 3000
-      });
-    }, 18000);
+    const fetchRates = async () => {
+      try {
+        const [xauRes, eurRes] = await Promise.all([
+          fetch("https://api.binance.com/api/v3/ticker/24hr?symbol=PAXGUSDT"),
+          fetch("https://api.binance.com/api/v3/ticker/24hr?symbol=EURUSDT"),
+        ]);
+        if (!xauRes.ok || !eurRes.ok) return;
+        const [xauData, eurData] = await Promise.all([xauRes.json(), eurRes.json()]);
+        if (cancelled) return;
 
-    return () => clearInterval(interval);
+        setRates({
+          xau: Number(Number(xauData.lastPrice).toFixed(2)),
+          xauDiff: Number(Number(xauData.priceChangePercent).toFixed(2)),
+          eur: Number(Number(eurData.lastPrice).toFixed(4)),
+          eurDiff: Number(Number(eurData.priceChangePercent).toFixed(2)),
+        });
+      } catch {
+        // Mạng lỗi hoặc API bị chặn: giữ nguyên giá trị hiện tại, không làm vỡ giao diện
+      }
+    };
+
+    fetchRates();
+    const interval = setInterval(fetchRates, 10000);
+    return () => {
+      cancelled = true;
+      clearInterval(interval);
+    };
   }, []);
 
   // 4. Lắng nghe cuộn trang để hiển thị nút Sticky CTA (khi bắt đầu cuộn qua Section 1)
@@ -460,10 +451,6 @@ function UltimaPartnershipPage() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  function rand(min: number, max: number) {
-    return Math.random() * (max - min) + min;
-  }
 
   // Xử lý gửi form đăng ký
   const TELEGRAM_BOT_TOKEN = "8736867683:AAFLb9Q4vKBn2Mtsj5PNuZjnQpIxkO1kYFU";
@@ -820,7 +807,8 @@ function UltimaPartnershipPage() {
           {/* Hiển thị nội dung Tab */}
           <div className="pt-4 min-h-[350px]">
             {coopTab === "synergy" && (
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch animate-fade-in">
+              <div className="space-y-8 animate-fade-in">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-stretch">
                 {/* Qi Prime Card */}
                 <div className="p-6 sm:p-8 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between hover:border-[#22C55E]/30 transition-all shadow-sm">
                   <div className="space-y-4">
@@ -867,17 +855,18 @@ function UltimaPartnershipPage() {
                     </div>
                   </div>
                 </div>
-                
-                {/* Showcase Banner với thiết kế mới */}
-                <Reveal delay={200} y={40} className="w-full">
-                  <TiltCard glow="rgba(34,197,94,0.2)">
-                    <img 
-                      src="/assets/Smart Money Moves.jpg" 
-                      alt="Smart Money Moves" 
-                      className="w-full h-auto object-cover rounded-2xl shadow-[0_0_50px_rgba(34,197,94,0.15)] border border-white/10" 
-                    />
-                  </TiltCard>
-                </Reveal>
+              </div>
+
+              {/* Showcase Banner Smart Money Moves — banner độc lập, full-width, căn giữa, không còn kẹt trong lưới 2 cột */}
+              <Reveal delay={200} y={30}>
+                <TiltCard glow="rgba(34,197,94,0.2)" className="w-full max-w-5xl mx-auto">
+                  <img
+                    src="/assets/Smart Money Moves.jpg"
+                    alt="Smart Money Moves"
+                    className="w-full h-auto object-cover rounded-2xl shadow-[0_0_40px_rgba(34,197,94,0.12)] border border-white/10"
+                  />
+                </TiltCard>
+              </Reveal>
               </div>
             )}
 
@@ -965,291 +954,6 @@ function UltimaPartnershipPage() {
             >
               Kích Hoạt Suất Free
             </button>
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 3: SOCIAL PROOF – PNL & LIVE TP FEED (Nền sáng, Screen 3) */}
-      <section className="py-16 md:py-24 bg-slate-50 border-b border-slate-200/50">
-        <div className="max-w-7xl mx-auto px-4 space-y-12">
-          <Reveal>
-            <div className="text-center max-w-2xl mx-auto space-y-3">
-              <span className="text-xs font-bold text-[#22C55E] uppercase tracking-widest font-mono">Kết Quả Thực Tế</span>
-              <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight font-display uppercase">
-                Dữ Liệu Minh Bạch – Lịch Sử TP & Quản Trị Rủi Ro Kỷ Luật
-              </h2>
-              <p className="text-slate-605 text-xs sm:text-sm text-balance">
-                Hệ thống tự động thực thi kỷ luật tuyệt đối. Tự động siết chặt SL (Stop Loss) theo biến động thị trường để bảo vệ tối đa nguồn vốn của bạn khi có đảo chiều bất ngờ.
-              </p>
-            </div>
-          </Reveal>
-
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-            {/* Thẻ biểu đồ tăng trưởng PnL SVG */}
-            <div ref={chart.ref} className="lg:col-span-7 bg-white border border-slate-200 rounded-2xl p-5 sm:p-7 flex flex-col justify-between space-y-6 shadow-sm">
-              <div className="flex justify-between items-start">
-                <div>
-                  <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest font-mono block">BIỂU ĐỒ HIỆU SUẤT</span>
-                  <h3 className="text-base sm:text-lg font-bold text-slate-800 mt-1">Đường Tăng Trưởng Tài Khoản Master (PnL)</h3>
-                </div>
-                <div className="text-right">
-                  <span className="text-[9px] text-[#22C55E] bg-[#22C55E]/15 px-2 py-0.5 rounded font-mono font-bold">TĂNG TRƯỞNG ỔN ĐỊNH</span>
-                  <div className="text-lg font-black text-slate-900 font-mono mt-1">+48.2% AUM</div>
-                </div>
-              </div>
-
-              {/* Vẽ biểu đồ dạng SVG nét sáng màu xanh emerald — có hiệu ứng vẽ đường chạy khi cuộn tới */}
-              <div className="w-full h-48 sm:h-56 relative bg-slate-50/50 rounded-xl overflow-hidden border border-slate-200">
-                <svg className="w-full h-full" viewBox="0 0 400 200" preserveAspectRatio="none">
-                  <defs>
-                    <linearGradient id="pnlGrad" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="#059669" stopOpacity="0.1" />
-                      <stop offset="100%" stopColor="#059669" stopOpacity="0.0" />
-                    </linearGradient>
-                  </defs>
-                  
-                  {/* Đường kẻ ô lưới */}
-                  <line x1="0" y1="50" x2="400" y2="50" stroke="#e2e8f0" strokeWidth="0.8" strokeDasharray="3,3" />
-                  <line x1="0" y1="100" x2="400" y2="100" stroke="#e2e8f0" strokeWidth="0.8" strokeDasharray="3,3" />
-                  <line x1="0" y1="150" x2="400" y2="150" stroke="#e2e8f0" strokeWidth="0.8" strokeDasharray="3,3" />
-                  
-                  {/* Vùng đổ màu phía dưới — mờ dần hiện ra sau khi đường vẽ xong */}
-                  <path 
-                    d="M 0 170 Q 50 160, 100 135 T 200 110 T 300 65 T 400 35 L 400 200 L 0 200 Z" 
-                    fill="url(#pnlGrad)"
-                    style={{
-                      opacity: chart.inView ? 1 : 0,
-                      transition: "opacity 0.8s ease-out 0.9s"
-                    }}
-                  />
-                  
-                  {/* Đường biểu diễn chính — Stroke Dasharray Animation (vẽ chạy mượt) */}
-                  <path 
-                    d="M 0 170 Q 50 160, 100 135 T 200 110 T 300 65 T 400 35" 
-                    fill="none" 
-                    stroke="#059669" 
-                    strokeWidth="3.5"
-                    strokeLinecap="round"
-                    pathLength={1}
-                    style={{
-                      strokeDasharray: 1,
-                      strokeDashoffset: chart.inView ? 0 : 1,
-                      transition: "stroke-dashoffset 1.6s cubic-bezier(0.65,0,0.35,1)"
-                    }}
-                  />
-
-                  {/* Các chấm hiển thị mốc — hiện dần theo tiến độ vẽ đường */}
-                  {[
-                    { cx: 100, cy: 135, d: "0.7s" },
-                    { cx: 200, cy: 110, d: "1.0s" },
-                    { cx: 300, cy: 65, d: "1.3s" }
-                  ].map((pt, i) => (
-                    <circle
-                      key={i}
-                      cx={pt.cx}
-                      cy={pt.cy}
-                      r="4.5"
-                      fill="#059669"
-                      style={{
-                        opacity: chart.inView ? 1 : 0,
-                        transition: `opacity 0.4s ease-out ${pt.d}`
-                      }}
-                    />
-                  ))}
-                  <circle
-                    cx="400" cy="35" r="5" fill="#059669" className="animate-ping"
-                    style={{ opacity: chart.inView ? 1 : 0, transition: "opacity 0.4s ease-out 1.55s" }}
-                  />
-                  <circle
-                    cx="400" cy="35" r="5" fill="#059669"
-                    style={{ opacity: chart.inView ? 1 : 0, transition: "opacity 0.4s ease-out 1.55s" }}
-                  />
-                </svg>
-                <div className="absolute left-3 bottom-3 text-[10px] text-slate-400 font-mono">T1/2026</div>
-                <div className="absolute right-3 bottom-3 text-[10px] text-slate-400 font-mono">Hiện tại</div>
-              </div>
-            </div>
-
-            {/* Bảng feed lệnh chạm TP theo thời gian thực */}
-            <div className="lg:col-span-5 bg-white border border-slate-200 rounded-2xl p-5 sm:p-7 flex flex-col justify-between space-y-6 shadow-sm">
-              <div>
-                <div className="flex items-center gap-1.5">
-                  <span className="w-2.5 h-2.5 rounded-full bg-[#22C55E] animate-ping"></span>
-                  <span className="text-[10px] font-bold text-[#22C55E] uppercase tracking-widest font-mono">TÍN HIỆU THỜI GIAN THỰC</span>
-                </div>
-                <h3 className="text-base sm:text-lg font-bold text-slate-800 mt-1">Lịch Sử Lệnh Chạm TP Gần Nhất</h3>
-              </div>
-
-              {/* Danh sách các lệnh đang hiển thị */}
-              <div className="space-y-3.5 flex-1 justify-center">
-                {liveTrades.map((trade, idx) => (
-                  <div key={idx} className="p-3 bg-slate-50 border border-slate-205 rounded-xl flex items-center justify-between gap-3 text-xs sm:text-sm animate-fade-in hover:border-slate-300 transition-colors">
-                    <div className="space-y-1">
-                      <div className="flex items-center gap-2">
-                        <span className="font-black text-slate-900">{trade.pair}</span>
-                        <span className={`text-[10px] px-1.5 py-0.5 rounded font-black font-mono ${trade.side === "MUA" ? "bg-[#22C55E]/20 text-[#22C55E]" : "bg-rose-100 text-rose-800"}`}>
-                          {trade.side}
-                        </span>
-                      </div>
-                      <div className="text-[10px] text-slate-550 font-medium font-mono">Điểm vào: {trade.price.toLocaleString()}</div>
-                    </div>
-
-                    <div className="text-right space-y-1">
-                      <div className="font-black text-[#22C55E] flex items-center justify-end gap-1 font-mono">
-                        <span>Chạm TP ({trade.tp.toLocaleString()})</span>
-                      </div>
-                      <div className="text-[10px] text-slate-500 flex items-center justify-end gap-1.5 font-medium">
-                        <span className="text-[#22C55E] font-bold font-mono">+{trade.pips} pips</span>
-                        <span className="text-zinc-400">•</span>
-                        <span>{trade.time}</span>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Cụm nút CTA kép kích thước lớn cho thiết bị di động */}
-          <div className="pt-6 max-w-xl mx-auto grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <Link
-              to="/qisignals"
-              className="bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-700 font-bold px-6 py-4 rounded-2xl text-sm flex items-center justify-center gap-2 transition-all active:scale-95 shadow-sm"
-            >
-              <MousePointerClick className="w-4 h-4 text-[#22C55E]" />
-              Xem Nhóm Tín Hiệu Trên Web
-            </Link>
-            
-            <a
-              href="https://t.me/qiprime_signals"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-[#22C55E] hover:bg-[#22C55E]/90 text-slate-950 font-bold px-6 py-4 rounded-2xl text-sm flex items-center justify-center gap-2 transition-all active:scale-95 shadow-md shadow-[#22C55E]/20"
-            >
-              <MessageSquare className="w-4 h-4 text-slate-950" />
-              Nhận Tín Hiệu Tele Báo Tức Thì
-            </a>
-          </div>
-
-          {/* QI PRIME SIGNALS CALCULATOR PREVIEW (REAL SCREENSHOTS) */}
-          <div className="mt-16 bg-white border border-slate-200 rounded-2xl p-6 sm:p-10 shadow-sm space-y-8">
-            <div className="text-center max-w-xl mx-auto space-y-2">
-              <span className="text-xs font-bold text-[#22C55E] uppercase tracking-widest font-mono">Minh Chứng Trực Quan</span>
-              <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight font-display uppercase">
-                Quy Trình Phân Tích & Phát Tín Hiệu AI Thực Tế
-              </h3>
-              <p className="text-slate-500 text-xs sm:text-sm">
-                Nhấp vào từng bước bên dưới để xem ảnh chụp màn hình thực tế từ ứng dụng phân tích Qi Prime và kênh đẩy lệnh Telegram tự động.
-              </p>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
-              {/* Left Column: Interactive Steps (Thumb Zone) */}
-              <div className="md:col-span-7 space-y-3">
-                {[
-                  {
-                    step: 1,
-                    title: "Bước 1: Quét Lọc Xu Hướng & Động Lượng",
-                    desc: "Lớp lọc Layer 1 (Trend Gate) xác định xu hướng tăng/giảm qua EMA21/50/200 và Layer 3 (Stochastic Trigger) đo lường vùng quá mua/quá bán."
-                  },
-                  {
-                    step: 2,
-                    title: "Bước 2: Bóc Tách Khối Lượng Dòng Tiền",
-                    desc: "Layer 4 (Order Flow) quét số lệnh, tính toán Delta mua bán, đo lường lực tấn công của phe bán (Seller Attack) hoặc mua để xác nhận điểm đảo chiều."
-                  },
-                  {
-                    step: 3,
-                    title: "Bước 3: AI Tự Động Phân Tích & Xuất Tín Hiệu",
-                    desc: "Động cơ Intelligent Flow Engine v2.0 tổng hợp điểm số AI Score và xuất ra nút lệnh hành động (MUA/BÁN) đi kèm điểm cắt lỗ, chốt lời cụ thể."
-                  },
-                  {
-                    step: 4,
-                    title: "Bước 4: Đẩy Tín Hiệu Qua Telegram Tức Thì",
-                    desc: "Hệ thống aibot tự động chuyển đổi thông số kỹ thuật thành tin nhắn thông báo gửi thẳng đến kênh Telegram của thành viên chỉ trong 1 giây."
-                  }
-                ].map((item) => (
-                  <button
-                    key={item.step}
-                    type="button"
-                    onClick={() => setSignalStep(item.step as any)}
-                    className={`w-full p-4 rounded-xl border text-left transition-all active:scale-[0.99] flex gap-3 ${
-                      signalStep === item.step
-                        ? "border-[#22C55E] bg-[#22C55E]/10 text-slate-900 shadow-sm"
-                        : "border-slate-100 bg-slate-50/50 text-slate-700 hover:border-slate-200 hover:bg-slate-50"
-                    }`}
-                  >
-                    <span className={`w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold font-mono flex-shrink-0 ${
-                      signalStep === item.step ? "bg-[#22C55E] text-slate-950" : "bg-slate-200 text-slate-600"
-                    }`}>
-                      {item.step}
-                    </span>
-                    <div>
-                      <h4 className="font-bold text-sm text-slate-900">{item.title}</h4>
-                      <p className="text-xs text-slate-500 mt-1 leading-relaxed">{item.desc}</p>
-                    </div>
-                  </button>
-                ))}
-              </div>
-
-              {/* Right Column: Phone Mockup Container */}
-              <div className="md:col-span-5 flex justify-center">
-                <div className="relative w-full max-w-[280px] aspect-[9/19] rounded-[36px] border-8 border-slate-900 bg-slate-950 overflow-hidden shadow-xl ring-4 ring-slate-100/50">
-                  {/* Notch area */}
-                  <div className="absolute top-2 left-1/2 -translate-x-1/2 w-20 h-4 bg-slate-900 rounded-full z-20"></div>
-                  
-                  {/* Dynamic Screenshot with smooth fade transition */}
-                  <div className="w-full h-full relative z-10 select-none bg-black">
-                    <img 
-                      src="/assets/signals-app-layer13.jpg" 
-                      alt="Trend Gate & Stochastic Indicator" 
-                      className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out ${signalStep === 1 ? "opacity-100 z-10" : "opacity-0 z-0"}`} 
-                    />
-                    <img 
-                      src="/assets/signals-app-layer4.jpg" 
-                      alt="Order Flow Analysis" 
-                      className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out ${signalStep === 2 ? "opacity-100 z-10" : "opacity-0 z-0"}`} 
-                    />
-                    
-                    {/* Step 3 has Buy/Sell toggle subsignal */}
-                    <div className={`absolute inset-0 w-full h-full transition-opacity duration-500 ease-in-out ${signalStep === 3 ? "opacity-100 z-10" : "opacity-0 z-0"}`}>
-                      {/* Sell/Buy sub-toggle button */}
-                      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 bg-slate-900/80 backdrop-blur px-2.5 py-1.5 rounded-lg flex gap-1.5 border border-slate-800 text-[10px]">
-                        <button 
-                          type="button" 
-                          onClick={(e) => { e.stopPropagation(); setToggleSubSignal("sell"); }}
-                          className={`px-2 py-0.5 rounded font-bold transition-all ${toggleSubSignal === "sell" ? "bg-red-500 text-white" : "text-zinc-400"}`}
-                        >
-                          BÁN (SELL)
-                        </button>
-                        <button 
-                          type="button" 
-                          onClick={(e) => { e.stopPropagation(); setToggleSubSignal("buy"); }}
-                          className={`px-2 py-0.5 rounded font-bold transition-all ${toggleSubSignal === "buy" ? "bg-[#22C55E] text-slate-950" : "text-zinc-400"}`}
-                        >
-                          MUA (BUY)
-                        </button>
-                      </div>
-                      <img 
-                        src="/assets/signals-app-sell.jpg" 
-                        alt="AI Signal Sell" 
-                        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${toggleSubSignal === "sell" ? "opacity-100" : "opacity-0"}`} 
-                      />
-                      <img 
-                        src="/assets/signals-app-buy.jpg" 
-                        alt="AI Signal Buy" 
-                        className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-300 ${toggleSubSignal === "buy" ? "opacity-100" : "opacity-0"}`} 
-                      />
-                    </div>
-                    
-                    <img 
-                      src="/assets/signals-tele-post.jpg" 
-                      alt="Telegram Channel Signals Post" 
-                      className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out ${signalStep === 4 ? "opacity-100 z-10" : "opacity-0 z-0"}`} 
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </section>
