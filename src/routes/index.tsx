@@ -585,13 +585,10 @@ function UltimaPartnershipPage() {
             </a>
             <span className="h-5 w-px bg-zinc-800"></span>
             
-            {/* Logo Thương Hiệu Ultima (Pill nền trắng để chữ đen nổi bật trên header tối) */}
+            {/* Logo Thương Hiệu Ultima (Pill nền trắng, chỉ hiển thị "Ultima", chữ đen) */}
             <div className="bg-white px-2 py-1 rounded-lg inline-flex items-center gap-1.5 shadow-sm">
               <UltimaLogoSVG />
-              <div className="flex flex-col">
-                <span className="text-[11px] font-black tracking-widest text-black leading-none font-display">ULTIMA</span>
-                <span className="text-[7.5px] tracking-wider text-[#C6FF00] leading-none font-bold">MARKETS</span>
-              </div>
+              <span className="text-[11px] font-black tracking-widest text-black leading-none font-display">ULTIMA</span>
             </div>
           </div>
 
@@ -626,7 +623,7 @@ function UltimaPartnershipPage() {
 
             <Reveal delay={90}>
               <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 leading-tight font-display tracking-tight uppercase">
-                90% thất bại của trader bắt nguồn từ một <span className="text-[#C6FF00] bg-gradient-to-r from-[#C6FF00] to-[#C6FF00]/70 bg-clip-text text-transparent drop-shadow-[0_0_12px_rgba(198,255,0,0.35)]">Entry sai lầm.</span>
+                90% thất bại của trader bắt nguồn từ một <span className="text-slate-950 bg-[#C6FF00] px-2 rounded-md box-decoration-clone shadow-[0_0_20px_rgba(198,255,0,0.4)]">Entry sai lầm.</span>
               </h1>
             </Reveal>
 
@@ -679,9 +676,9 @@ function UltimaPartnershipPage() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center mb-10 md:mb-16">
             <Reveal className="lg:col-span-8">
               <div className="text-center lg:text-left max-w-2xl mx-auto lg:mx-0 space-y-3">
-                <span className="text-xs font-bold text-[#C6FF00] uppercase tracking-widest font-mono">Giải Pháp Đột Phá Từ AI</span>
+                <span className="inline-block text-xs font-bold text-black bg-[#C6FF00] px-3 py-1 rounded-full uppercase tracking-widest font-mono">Giải Pháp Đột Phá Từ AI</span>
                 <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight font-display text-balance uppercase">
-                  Xóa Bỏ Định Kiến Cảm Tính – Thiết Lập Tiêu Chuẩn Vào Lệnh Xác Suất 70%
+                  Kỷ Luật Tuyệt Đối – Tiêu Chuẩn Vào Lệnh Xác Suất 70%
                 </h2>
                 <p className="text-slate-600 text-xs sm:text-sm text-balance leading-relaxed">
                   Qi Prime thay thế toàn bộ yếu tố tâm lý con người bằng một hạ tầng phân tích nghiêm ngặt. Hệ thống 6 AI Agents độc lập hoạt động realtime 24/7, quét sâu và xử lý dữ liệu toàn diện trên mọi khung thời gian. Chúng tôi không dự đoán thị trường, chúng tôi bắt thị trường phải đưa ra những xác nhận cốt lõi và rõ ràng nhất trước khi giải ngân.
@@ -708,10 +705,10 @@ function UltimaPartnershipPage() {
                   <div className="p-6 rounded-2xl bg-white border border-slate-200 hover:border-[#C6FF00]/40 transition-all duration-300 flex flex-col justify-between group shadow-sm hover:shadow-lg hover:shadow-[#C6FF00]/5 h-full">
                     <div className="space-y-4">
                       <div className="flex justify-between items-center">
-                        <span className="text-[10px] font-bold text-[#C6FF00] bg-[#C6FF00]/15 px-2 py-0.5 rounded-full tracking-wider uppercase font-mono">{agent.tag}</span>
+                        <span className="text-[10px] font-bold text-black bg-[#C6FF00] px-2 py-0.5 rounded-full tracking-wider uppercase font-mono">{agent.tag}</span>
                         <span className="text-xs text-slate-400 font-mono">Đặc vụ #0{agent.id}</span>
                       </div>
-                      <h3 className="text-xl font-extrabold tracking-tight text-slate-900 group-hover:text-[#C6FF00] transition-colors">{agent.name}</h3>
+                      <h3 className="text-xl font-extrabold tracking-tight text-slate-900">{agent.name}</h3>
                       <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">{agent.description}</p>
                     </div>
                     <div className="pt-4 border-t border-slate-100 mt-6 flex justify-between items-center text-xs">
@@ -730,7 +727,7 @@ function UltimaPartnershipPage() {
             <div className="p-6 rounded-2xl bg-white border border-[#C6FF00]/20 shadow-md space-y-4 min-h-[190px] flex flex-col justify-between">
               <div className="space-y-3">
                 <div className="flex justify-between items-center">
-                  <span className="text-[9px] font-bold text-[#C6FF00] bg-[#C6FF00]/15 px-2.5 py-0.5 rounded-full uppercase tracking-wider font-mono">
+                  <span className="text-[9px] font-bold text-black bg-[#C6FF00] px-2.5 py-0.5 rounded-full uppercase tracking-wider font-mono">
                     {AI_AGENTS[activeAgentIdx].tag}
                   </span>
                   <span className="text-xs text-slate-400 font-mono">Đặc vụ #0{AI_AGENTS[activeAgentIdx].id}</span>
@@ -740,7 +737,7 @@ function UltimaPartnershipPage() {
               </div>
               <div className="pt-3.5 border-t border-slate-100 mt-4 flex justify-between items-center text-xs">
                 <span className="text-slate-400">Thông số hiệu suất:</span>
-                <span className="font-bold text-[#C6FF00] font-mono">{AI_AGENTS[activeAgentIdx].metric}</span>
+                <span className="font-bold text-slate-800 font-mono">{AI_AGENTS[activeAgentIdx].metric}</span>
               </div>
             </div>
 
@@ -781,7 +778,7 @@ function UltimaPartnershipPage() {
         <div className="max-w-7xl mx-auto px-4 space-y-8">
           <Reveal>
             <div className="text-center max-w-2xl mx-auto space-y-3">
-              <span className="text-xs font-bold text-[#C6FF00] uppercase tracking-widest font-mono">Bảo Chứng Uy Tín & Chất Lượng</span>
+              <span className="inline-block text-xs font-bold text-black bg-[#C6FF00] px-3 py-1 rounded-full uppercase tracking-widest font-mono">Bảo Chứng Uy Tín & Chất Lượng</span>
               <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight font-display uppercase">
                 Hợp Tác Chiến Lược: Qi Prime x Ultima Markets
               </h2>
@@ -803,7 +800,7 @@ function UltimaPartnershipPage() {
                       <div className="bg-slate-950 px-3.5 py-2 rounded-xl inline-flex items-center shadow-md border border-zinc-800">
                         <QiPrimeLogoSVG />
                       </div>
-                      <span className="text-xs font-bold text-[#C6FF00] bg-[#C6FF00]/15 px-3 py-1.5 rounded-full uppercase tracking-widest font-mono">Đơn Vị Công Nghệ</span>
+                      <span className="text-xs font-bold text-black bg-[#C6FF00] px-3 py-1.5 rounded-full uppercase tracking-widest font-mono">Đơn Vị Công Nghệ</span>
                     </div>
                     <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
                       <strong>Qi Prime</strong> là tổ chức công nghệ hàng đầu phát triển hệ sinh thái giao dịch tự động. Trục cốt lõi dựa trên 6 AI Agents giám sát dòng tiền lớn và phòng hộ tài khoản theo chuẩn quản trị rủi ro thể chế.
@@ -827,7 +824,7 @@ function UltimaPartnershipPage() {
                         <UltimaLogoSVG />
                         <span className="text-xs font-black tracking-widest text-black leading-none font-display">ULTIMA</span>
                       </div>
-                      <span className="text-xs font-bold text-[#C6FF00] bg-[#C6FF00]/15 px-3 py-1.5 rounded-full uppercase tracking-widest font-mono">Đại Diện Hạ Tầng</span>
+                      <span className="text-xs font-bold text-black bg-[#C6FF00] px-3 py-1.5 rounded-full uppercase tracking-widest font-mono">Đại Diện Hạ Tầng</span>
                     </div>
                     <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
                       <strong>Ultima Markets</strong> là nhà môi giới tài chính toàn cầu được cấp phép. Cung cấp nền tảng giao dịch thanh khoản sâu chuẩn thể chế với tốc độ khớp lệnh cực cao và an toàn tài khoản ký quỹ tuyệt đối.
@@ -858,7 +855,7 @@ function UltimaPartnershipPage() {
                 </TiltCard>
                 {/* Lời tự sự hành trình */}
                 <div className="space-y-5">
-                  <span className="text-xs font-bold text-[#C6FF00] uppercase tracking-widest font-mono">Kỷ Niệm Hành Trình 10 Năm</span>
+                  <span className="inline-block text-xs font-bold text-black bg-[#C6FF00] px-3 py-1 rounded-full uppercase tracking-widest font-mono">Kỷ Niệm Hành Trình 10 Năm</span>
                   <h3 className="text-xl sm:text-2xl font-bold text-slate-900">10 Năm Kiến Tạo Niềm Tin — Hướng Đến Tương Lai</h3>
                   <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
                     Trải qua một thập kỷ hình thành và phát triển bền vững, Ultima Markets đã khẳng định vị thế vững chắc của mình trên thị trường tài chính thế giới. Sự kiện 10 năm kiến tạo niềm tin minh chứng cho cam kết về tính minh bạch, an toàn và hiệu năng công nghệ mà Ultima dành cho khách hàng.
@@ -884,7 +881,7 @@ function UltimaPartnershipPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
                 {/* Danh sách giải thưởng */}
                 <div className="space-y-4 text-left">
-                  <span className="text-xs font-bold text-[#C6FF00] uppercase tracking-widest font-mono block mb-2">Brands Review Magazine Awards 2026</span>
+                  <span className="inline-block text-xs font-bold text-black bg-[#C6FF00] px-3 py-1 rounded-full uppercase tracking-widest font-mono mb-2">Brands Review Magazine Awards 2026</span>
                   <h3 className="text-xl font-bold text-slate-900 mb-4">Các Hạng Mục Vinh Danh Danh Giá</h3>
 
                   <div className="space-y-3">
@@ -936,7 +933,7 @@ function UltimaPartnershipPage() {
         <div className="max-w-6xl mx-auto px-4 relative">
           <Reveal>
             <div className="text-center max-w-xl mx-auto space-y-2 mb-8">
-              <span className="text-xs font-bold text-[#C6FF00] uppercase tracking-widest font-mono">Minh Chứng Trực Quan</span>
+              <span className="inline-block text-xs font-bold text-black bg-[#C6FF00] px-3 py-1 rounded-full uppercase tracking-widest font-mono">Minh Chứng Trực Quan</span>
               <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900 tracking-tight font-display uppercase">
                 Quy Trình Phân Tích & Phát Tín Hiệu AI Thực Tế
               </h3>
@@ -1067,7 +1064,7 @@ function UltimaPartnershipPage() {
         <div className="max-w-2xl mx-auto px-4 relative space-y-8">
           <Reveal>
             <div className="text-center space-y-4">
-              <span className="text-xs font-bold text-[#C6FF00] uppercase tracking-widest font-mono block">CƠ HỘI ĐỘC QUYỀN</span>
+              <span className="inline-block text-xs font-bold text-black bg-[#C6FF00] px-3 py-1 rounded-full uppercase tracking-widest font-mono">CƠ HỘI ĐỘC QUYỀN</span>
               <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight font-display uppercase leading-tight text-balance">
                 Cơ Hội Trải Nghiệm Hệ Sinh Thế Qi Prime Khép Kín Cùng Hạ Tầng Ultima
               </h2>
@@ -1095,7 +1092,7 @@ function UltimaPartnershipPage() {
             {/* Thời gian ưu đãi còn lại */}
             <div className="bg-slate-50 border border-slate-200 p-4 rounded-xl text-center space-y-1 shadow-sm">
               <span className="text-[10px] text-slate-500 uppercase tracking-wider font-semibold block">Thời Gian Còn Lại</span>
-              <span className="text-xl sm:text-2xl font-black text-[#C6FF00] font-mono block">
+              <span className="text-xl sm:text-2xl font-black text-slate-900 font-mono block">
                 {Math.floor(timeLeft / 60).toString().padStart(2, "0")}:
                 {(timeLeft % 60).toString().padStart(2, "0")}
               </span>
@@ -1179,10 +1176,7 @@ function UltimaPartnershipPage() {
               <span className="h-4 w-px bg-zinc-800"></span>
               <div className="bg-white px-2 py-1 rounded-lg inline-flex items-center gap-1.5 shadow-sm">
                 <UltimaLogoSVG />
-                <div className="flex flex-col">
-                  <span className="text-[10px] font-black tracking-widest text-black font-display">ULTIMA</span>
-                  <span className="text-[7px] tracking-wider text-[#C6FF00] font-bold font-mono">MARKETS</span>
-                </div>
+                <span className="text-[10px] font-black tracking-widest text-black font-display">ULTIMA</span>
               </div>
             </div>
             
