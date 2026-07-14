@@ -714,7 +714,7 @@ function UltimaPartnershipPage() {
                       <h3 className="text-xl font-extrabold tracking-tight text-slate-900 group-hover:text-[#C6FF00] transition-colors">{agent.name}</h3>
                       <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">{agent.description}</p>
                     </div>
-                    <div className="pt-4 border-t border-slate-105 mt-6 flex justify-between items-center text-xs">
+                    <div className="pt-4 border-t border-slate-100 mt-6 flex justify-between items-center text-xs">
                       <span className="text-slate-400">Thông số kỹ thuật:</span>
                       <span className="font-bold text-slate-800 font-mono">{agent.metric}</span>
                     </div>
@@ -785,7 +785,7 @@ function UltimaPartnershipPage() {
               <h2 className="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight font-display uppercase">
                 Hợp Tác Chiến Lược: Qi Prime x Ultima Markets
               </h2>
-              <p className="text-slate-650 text-xs sm:text-sm text-balance">
+              <p className="text-slate-600 text-xs sm:text-sm text-balance">
                 Khám phá sức mạnh cộng hưởng giữa giải pháp giao dịch trí tuệ nhân tạo hàng đầu và hạ tầng sàn giao dịch đạt nhiều giải thưởng quốc tế.
               </p>
             </div>
@@ -860,7 +860,7 @@ function UltimaPartnershipPage() {
                 <div className="space-y-5">
                   <span className="text-xs font-bold text-[#C6FF00] uppercase tracking-widest font-mono">Kỷ Niệm Hành Trình 10 Năm</span>
                   <h3 className="text-xl sm:text-2xl font-bold text-slate-900">10 Năm Kiến Tạo Niềm Tin — Hướng Đến Tương Lai</h3>
-                  <p className="text-slate-650 text-xs sm:text-sm leading-relaxed">
+                  <p className="text-slate-600 text-xs sm:text-sm leading-relaxed">
                     Trải qua một thập kỷ hình thành và phát triển bền vững, Ultima Markets đã khẳng định vị thế vững chắc của mình trên thị trường tài chính thế giới. Sự kiện 10 năm kiến tạo niềm tin minh chứng cho cam kết về tính minh bạch, an toàn và hiệu năng công nghệ mà Ultima dành cho khách hàng.
                   </p>
 
@@ -899,7 +899,7 @@ function UltimaPartnershipPage() {
                         <span className="p-1 bg-[#C6FF00]/15 text-[#C6FF00] rounded-full mt-0.5 flex-shrink-0">
                           <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="8" r="7"></circle><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline></svg>
                         </span>
-                        <span className="text-slate-705 font-medium">{award}</span>
+                        <span className="text-slate-700 font-medium">{award}</span>
                       </div>
                     ))}
                   </div>
@@ -1085,16 +1085,16 @@ function UltimaPartnershipPage() {
           {/* Các đồng hồ đếm ngược và thanh đo số suất còn lại */}
           <div className="grid grid-cols-2 gap-4 max-w-md mx-auto">
             {/* Số suất giảm dần */}
-            <div className="bg-slate-50 border border-slate-250 p-4 rounded-xl text-center space-y-1 shadow-sm">
-              <span className="text-[10px] text-slate-550 uppercase tracking-wider font-semibold block">Tình Trạng Suất</span>
+            <div className="bg-slate-50 border border-slate-200 p-4 rounded-xl text-center space-y-1 shadow-sm">
+              <span className="text-[10px] text-slate-500 uppercase tracking-wider font-semibold block">Tình Trạng Suất</span>
               <span className="text-xl sm:text-2xl font-black text-rose-600 font-mono block">
                 Chỉ còn <span className="underline animate-pulse">{slotsLeft}</span> suất
               </span>
             </div>
             
             {/* Thời gian ưu đãi còn lại */}
-            <div className="bg-slate-50 border border-slate-250 p-4 rounded-xl text-center space-y-1 shadow-sm">
-              <span className="text-[10px] text-slate-555 uppercase tracking-wider font-semibold block">Thời Gian Còn Lại</span>
+            <div className="bg-slate-50 border border-slate-200 p-4 rounded-xl text-center space-y-1 shadow-sm">
+              <span className="text-[10px] text-slate-500 uppercase tracking-wider font-semibold block">Thời Gian Còn Lại</span>
               <span className="text-xl sm:text-2xl font-black text-[#C6FF00] font-mono block">
                 {Math.floor(timeLeft / 60).toString().padStart(2, "0")}:
                 {(timeLeft % 60).toString().padStart(2, "0")}
@@ -1103,7 +1103,7 @@ function UltimaPartnershipPage() {
           </div>
 
           {/* Form đăng ký tối giản */}
-          <div className="bg-slate-55 border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-md">
+          <div className="bg-slate-50 border border-slate-200 rounded-2xl p-6 sm:p-8 shadow-md">
             {success ? (
               <div className="text-center py-6 space-y-4">
                 <div className="inline-flex p-3 rounded-full bg-[#C6FF00]/20 text-[#C6FF00] border border-[#C6FF00]/30 animate-bounce">
@@ -1161,7 +1161,7 @@ function UltimaPartnershipPage() {
                   <ArrowRight className="w-4 h-4 stroke-[3px]" />
                 </button>
 
-                <p className="text-[10px] text-slate-450 text-center mt-2">
+                <p className="text-[10px] text-slate-400 text-center mt-2">
                   🔒 Thông tin được bảo mật tuyệt đối theo tiêu chuẩn mã hóa SSL/TLS.
                 </p>
               </form>
