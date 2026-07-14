@@ -585,11 +585,11 @@ function UltimaPartnershipPage() {
             </a>
             <span className="h-5 w-px bg-zinc-800"></span>
             
-            {/* Logo Thương Hiệu Ultima */}
-            <div className="flex items-center gap-1.5">
+            {/* Logo Thương Hiệu Ultima (Pill nền trắng để chữ đen nổi bật trên header tối) */}
+            <div className="bg-white px-2 py-1 rounded-lg inline-flex items-center gap-1.5 shadow-sm">
               <UltimaLogoSVG />
               <div className="flex flex-col">
-                <span className="text-[11px] font-black tracking-widest text-white leading-none font-display">ULTIMA</span>
+                <span className="text-[11px] font-black tracking-widest text-black leading-none font-display">ULTIMA</span>
                 <span className="text-[7.5px] tracking-wider text-[#C6FF00] leading-none font-bold">MARKETS</span>
               </div>
             </div>
@@ -823,9 +823,9 @@ function UltimaPartnershipPage() {
                 <div className="p-6 sm:p-8 rounded-2xl bg-slate-50 border border-slate-200 flex flex-col justify-between hover:border-[#C6FF00]/30 transition-all shadow-sm">
                   <div className="space-y-4">
                     <div className="flex items-center gap-3">
-                      <div className="bg-slate-950 px-3.5 py-2 rounded-xl inline-flex items-center gap-1.5 shadow-md border border-zinc-800">
+                      <div className="bg-white px-3.5 py-2 rounded-xl inline-flex items-center gap-1.5 shadow-md border border-zinc-800">
                         <UltimaLogoSVG />
-                        <span className="text-xs font-black tracking-widest text-white leading-none font-display">ULTIMA</span>
+                        <span className="text-xs font-black tracking-widest text-black leading-none font-display">ULTIMA</span>
                       </div>
                       <span className="text-xs font-bold text-[#C6FF00] bg-[#C6FF00]/15 px-3 py-1.5 rounded-full uppercase tracking-widest font-mono">Đại Diện Hạ Tầng</span>
                     </div>
@@ -1177,10 +1177,10 @@ function UltimaPartnershipPage() {
             <div className="flex items-center gap-3">
               <QiPrimeLogoSVG />
               <span className="h-4 w-px bg-zinc-800"></span>
-              <div className="flex items-center gap-1.5">
+              <div className="bg-white px-2 py-1 rounded-lg inline-flex items-center gap-1.5 shadow-sm">
                 <UltimaLogoSVG />
                 <div className="flex flex-col">
-                  <span className="text-[10px] font-black tracking-widest text-white font-display">ULTIMA</span>
+                  <span className="text-[10px] font-black tracking-widest text-black font-display">ULTIMA</span>
                   <span className="text-[7px] tracking-wider text-[#C6FF00] font-bold font-mono">MARKETS</span>
                 </div>
               </div>
