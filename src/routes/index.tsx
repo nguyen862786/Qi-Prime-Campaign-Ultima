@@ -510,19 +510,19 @@ function UltimaPartnershipPage() {
   };
 
   // Logo Qi Prime chính thức — dùng đúng file ảnh nhận diện thương hiệu thay vì SVG vẽ tay
-  const QiPrimeLogoSVG = () => (
+  const QiPrimeLogoSVG = ({ compact = false }: { compact?: boolean } = {}) => (
     <div className="flex items-center gap-2">
       <img
         src="/assets/qiprime-icon.png"
         alt="Qi Prime"
         width={32}
         height={32}
-        className="h-8 w-8 object-contain flex-shrink-0"
+        className={compact ? "h-6 sm:h-8 w-6 sm:w-8 object-contain flex-shrink-0" : "h-8 w-8 object-contain flex-shrink-0"}
       />
       <span
-        className="font-black tracking-widest text-lg font-display uppercase text-[#F5F5F5]"
-        style={{ 
-          textShadow: "0 0 10px rgba(245, 245, 245, 0.7), 0 0 20px rgba(245, 245, 245, 0.3)" 
+        className={`font-black tracking-widest font-display uppercase text-[#F5F5F5] ${compact ? "text-base sm:text-lg" : "text-lg"}`}
+        style={{
+          textShadow: "0 0 10px rgba(245, 245, 245, 0.7), 0 0 20px rgba(245, 245, 245, 0.3)"
         }}
       >
         QI PRIME
@@ -567,28 +567,24 @@ function UltimaPartnershipPage() {
 
       {/* Header/Navbar (Nền tối để làm nổi bật logo phát sáng) */}
       <header className="sticky top-0 z-40 bg-slate-950/95 backdrop-blur-md border-b border-zinc-900 shadow-md">
-        <div className="max-w-7xl mx-auto px-4 h-16 sm:h-20 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            {/* Logo Qi Prime */}
-            <a href="/" className="block">
-              <QiPrimeLogoSVG />
-            </a>
-            <span className="h-5 w-px bg-zinc-800"></span>
-            
-            {/* Logo Thương Hiệu Ultima — bản crop khít viền trắng thừa của file gốc (không vẽ lại). Fix cứng h-8 để chữ Ultima cao bằng chữ QI PRIME, không lấn át bố cục Header */}
-            <div className="bg-white px-2 py-1 rounded-lg inline-flex items-center shadow-sm">
-              <img src="/assets/logo-ultima-tight.png" alt="Ultima" className="h-8 w-auto object-contain" />
-            </div>
+        <div className="max-w-7xl mx-auto h-16 sm:h-20 flex items-center justify-between w-full px-4 md:px-8">
+          {/* Logo Qi Prime — ghim sát lề trái */}
+          <a href="/" className="block flex-shrink-0">
+            <QiPrimeLogoSVG compact />
+          </a>
+
+          {/* Logo Thương Hiệu Ultima — bản crop khít viền trắng thừa của file gốc (không vẽ lại). Căn giữa tuyệt đối nhờ justify-between 3 phần tử, không còn dính sát Qi Prime nên tránh đè nút CTA trên mobile */}
+          <div className="bg-white px-2 py-1 h-7 sm:h-8 rounded-lg inline-flex items-center shadow-sm flex-shrink-0">
+            <img src="/assets/logo-ultima-tight.png" alt="Ultima" className="h-4 sm:h-5 w-auto object-contain" />
           </div>
 
-          <div>
-            <button 
-              onClick={() => scrollToRef(section4Ref)}
-              className="bg-[#C6FF00] hover:bg-[#C6FF00]/90 text-slate-950 font-black text-xs sm:text-sm px-4 py-2 sm:px-5 sm:py-2.5 rounded-xl transition-all shadow-md active:scale-95"
-            >
-              Nhận Suất Free
-            </button>
-          </div>
+          {/* Nút CTA — ghim sát lề phải */}
+          <button
+            onClick={() => scrollToRef(section4Ref)}
+            className="bg-[#C6FF00] hover:bg-[#C6FF00]/90 text-slate-950 font-black text-xs px-3 py-1.5 sm:text-sm sm:px-5 sm:py-2.5 rounded-xl transition-all shadow-md active:scale-95 flex-shrink-0"
+          >
+            Nhận Suất Free
+          </button>
         </div>
       </header>
 
